@@ -1,8 +1,14 @@
-# Forkwell Coronavirus Hack: Virus Combat
+# Forkwell Coronavirus Hack: Virus Combat - Team The Game Changer
 
-[Fork](https://guides.github.com/activities/forking/) this repository to start participating!
-
-[![](https://img.shields.io/discord/692562848437764096.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://discord.gg/jFjbXqp)
+## Team
+### Team Name
+The Game Changer
+### Team Members
+Daokun
+Yihao
+Huixin
+Sukchin
+Wen Jie
 
 ## About
 
@@ -40,6 +46,7 @@ Build web-based or mobile apps to help nations cope with the outbreak.
 3. Showcase your proposal and prototype.
 
 ## Submission
+To be updated
 
 You are required to submit a 15-minute presentation video of your report. However, to ensure the
 legitimacy of your submission, you are required to submit your project artifacts (code, datasets,
