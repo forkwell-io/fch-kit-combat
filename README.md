@@ -1,17 +1,13 @@
-# Forkwell Coronavirus Hack: Virus Combat - Team The Game Changer
+# Forkwell Coronavirus Hack: Virus Combat
 
 ## Team
 ### Team Name
 The Game Changer
 ### Team Members
 Daokun
-
 Yihao
-
 Huixin
-
 Sukchin
-
 Wen Jie
 
 ## About
@@ -50,8 +46,6 @@ Build web-based or mobile apps to help nations cope with the outbreak.
 3. Showcase your proposal and prototype.
 
 ## Submission
-To be updated
-
 You are required to submit a 15-minute presentation video of your report. However, to ensure the
 legitimacy of your submission, you are required to submit your project artifacts (code, datasets,
 documents) as a [fork](https://guides.github.com/activities/forking/) to this repository.
@@ -118,22 +112,3 @@ internet to use. Please ensure that you don't commit any sensitive information!
 | nodejs-starter       | https://github.com/MLH/mlh-hackathon-nodejs-starter |
 | rails-devise-graphql | https://github.com/zauberware/rails-devise-graphql  |
 | microAuth            | https://github.com/Gingernaut/microAuth             |
-
-## Awesome perks from our sponsors!
-
-Deployment
-- [DigitalOcean](https://do.co/forkwell)
-
-E-learning
-- [Microsoft Learn](https://aka.ms/learn)
-
-## Help us organize better
-
-Feel free to open issues if you find anything lacking and we appreciate your feedback greatly!
-
-## Community
-
-Join the community!
-- [Discord](https://discord.gg/jFjbXqp)
-- [Forkwell Facebook Group](https://facebook.com/groups/forkwellcoronavirushack/)
-
