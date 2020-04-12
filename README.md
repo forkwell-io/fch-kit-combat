@@ -1,128 +1,64 @@
-# Forkwell Coronavirus Hack: Virus Combat
+<p align="center">
+<a href="https://designrevision.com/downloads/shards-dashboard-lite-react/">
+<img src="assets/preview.png" width="250" />
+</a>
+</p>
 
-[Fork](https://guides.github.com/activities/forking/) this repository to start participating!
+<h1 align="center" style="border-bottom: none !important; margin-bottom: 5px !important;"><a href="https://designrevision.com/downloads/shards-dashboard-lite-react/">Integrated Design Project</a></h1>
+<p align="center">
+  <a href="#">
+    <img src="https://img.shields.io/badge/License-MIT-brightgreen.svg" />
+  </a>
+</p>
 
-[![](https://img.shields.io/discord/692562848437764096.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://discord.gg/jFjbXqp)
+<p align="center">
+This is the proposed project for EEET 4002 Integrated Design Project. The project is a smoker detection system that alerts authorities or premise owners when an offence has been made on a non-smoking zone. 
+</p>
 
-## About
+<p align="center">
+  <a href="https://idp-app-70f95.firebaseapp.com">
+    <img height="55px" src="assets/btn-live-preview.png" />
+  </a>
+</p>
 
-Welcome to [Forkwell Coronavirus Hack](https://www.forkwell.io/events/forkwell-coronavirus-hack)!
+<br />
 
-This repository contains the hackathon kit for you to get started on solving **Topic 2: Virus
-Combat** and (eventually) all of your submissions.
 
-## Sponsors
+![Output sample](https://github.com/mcoscon/integrated-design-project/blob/master/ProgressDemo.gif)
 
-| [![Microsoft](https://user-images.githubusercontent.com/19421765/77505763-ff940400-6e9e-11ea-8c47-cafdf6b3b2d6.png)](https://microsoft.com/)           | [![MDEC](https://uploads-ssl.webflow.com/5dedc0ed675ba87b09857f05/5e7b5a7ea804328ecaf8e5a2_mdec.png)](https://mdec.my/)                       | [![Runcloud](https://uploads-ssl.webflow.com/5dedc0ed675ba87b09857f05/5e79fb8c21fcad40f1a34b8a_runcloud.png)](https://runcloud.io/)                  |
-|--------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [![AWS](https://uploads-ssl.webflow.com/5dedc0ed675ba87b09857f05/5e7b5a7ef803a29eed975378_aws.png)](https://aws.amazon.com/)                           | [![DigitlOcean](https://uploads-ssl.webflow.com/5dedc0ed675ba87b09857f05/5e79fb8b1de27906a0d0c3dc_digital-ocean.png)](https://do.co/forkwell) | [![Sunway iLabs](https://uploads-ssl.webflow.com/5dedc0ed675ba87b09857f05/5e79fb8c1de2795359d0c3de_ilab.png)](https://innovationlabs.sunway.edu.my/) |
-| [![CoronaTracker](https://uploads-ssl.webflow.com/5dedc0ed675ba87b09857f05/5e7c7a1afb4b4a4e49fa0357_coronatracker.png)](https://www.coronatracker.com) | [![LEAD](https://uploads-ssl.webflow.com/5dedc0ed675ba87b09857f05/5e7c7a1af1e7b76379787b82_lead.png)](https://www.thelead.io/)                | [![AI Geeks](https://uploads-ssl.webflow.com/5dedc0ed675ba87b09857f05/5e798a3fccd66c285759a635_ai-geeks.png)](https://aigeeks.net/)                  |
 
-## Background
+<br />
 
-WHO has outlined key actions for managing pandemics; testing, tracking, tracing, isolation and
-quarantine. Governments around the world are applying these key actions to cope with the spread of
-disease but appear to be inadequate with the scale of the outbreak. We as individuals can play a
-substantial role in combating this outbreak. With the help of modern technologies, we can realise
-these actions effectively.
+### Dashboard Quick Start 
+* Nodejs, Firebase and Firebase Command Line Interface (CLI) should be first installed on your system.
+* Install dependencies by running `yarn` or `npm install` on the root folder.
+* Run `npm run start` to start the local development server.
+* Run `npm run build` to deploy all static files into the build folder and then run `firebase deploy` to deploy the dashboard to Firebase Hosting.
 
-Developing a tool targeted for government, authorities, communities, and individuals are all
-acceptable. Teams with the winning prototype will automatically get **wildcard** placement in
-[Sunway iLab's Super Accelerator](https://innovationlabs.sunway.edu.my/accelerator/) program to
-realise the prototype at scale!
+<br />
 
-## Goal
+### Raspberry PI Quick Start 
+* Python 3.6 or greater should be installed in your system.
+* Pyrebase should be installed in your system.
+* Start the raspberrySend.py script by `python -m raspberrySend`
 
-Build web-based or mobile apps to help nations cope with the outbreak.
+<br />
 
-1. Identify worrying trends by applying AI and Big Data techniques to publicly available datasets.
-2. Propose and develop a prototype that helps nations alleviate these worrying trends.
-3. Showcase your proposal and prototype.
+### Project Structure
 
-## Submission
+- The project contains two parts, a machine learning model is run on edge and executes inferences on the captured frames from the camera. Once detected, relevant data (i.e time, date, location) is sent to the database where it can be displayed on a Dashboard. Moreover, an alert can be sent to an email once an offence has been detected.
 
-You are required to submit a 15-minute presentation video of your report. However, to ensure the
-legitimacy of your submission, you are required to submit your project artifacts (code, datasets,
-documents) as a [fork](https://guides.github.com/activities/forking/) to this repository.
+- The index.js file under the Functions folder contains the cloud function that sends an alert to the specified email recipient once a detection occurs.
+<br />
 
-A submission form will be available on the 14th of April 2020 for submission,
-please join our
-[facebook](https://facebook.com/groups/forkwellcoronavirushack/) group and
-[discord](https://discord.gg/jFjbXqp) channel to keep updated with latest changes.
+### Built using
+- [Reactjs](https://reactjs.org/)
+- [Material UI](https://material-ui.com/)
+- [Firebase](https://firebase.google.com/)
+- [Raspberry PI 3B+](https://www.raspberrypi.org/)
+- [Intel Neural Compute Stick](https://software.intel.com/en-us/articles/intel-movidius-neural-compute-stick)
+- [Nodejs](https://nodejs.org/en/)
+- [Pyrebase](https://github.com/thisbejim/Pyrebase)
 
-After creating your own [fork](https://guides.github.com/activities/forking/), clone your
-repository:
-
-```sh
-git clone git@github.com:<your-github-username>/fch-virus-combat
-```
-
-Change to the directory:
-
-```sh
-cd fch-virus-combat
-```
-
-Set upstream:
-
-```sh
-git remote add upstream git@github.com:forkwell-io/fch-virus-combat
-```
-
-...and start Hacking!!
-
-Once you are ready to submit, create a pull request from your
-[fork](https://guides.github.com/activities/forking/) to us and include the link to your fork in
-your submission form that will be available on the 14th of April 2020.
-
-Please remember that your code will be publicly available, open-sourced licesed and free for the
-internet to use. Please ensure that you don't commit any sensitive information!
-
-## Resources
-
-### Databases
-
-| Name                                             | Link                                                                                                          |
-|--------------------------------------------------|---------------------------------------------------------------------------------------------------------------|
-| New cases, New deaths, Total cases, Total deaths | https://covid.ourworldindata.org/data/full_data.csv                                                           |
-| Airport codes                                    | https://drive.google.com/file/d/1Wb1bYYfS46356uAeyw1qGse7SQjo5OEa/view?usp=sharing                            |
-| Flight data                                      | https://drive.google.com/file/d/1eSq2vDSQJzDeORZS_VcjzZ_PRcbhcbf7/view?usp=sharing                            |
-| World Health Organization                        | https://drive.google.com/open?id=1oe15S0i9fG4mYr8IxqWfASYbxsunWyRh                                            |
-| Johns Hopkins                                    | https://github.com/CSSEGISandData/COVID-19                                                                    |
-| Nextstrain                                       | https://github.com/nextstrain/ncov                                                                            |
-| Dataset Seach                                    | https://blog-google.cdn.ampproject.org/c/s/blog.google/products/search/discovering-millions-datasets-web/amp/ |
-
-### APIs
-
-| Name                 | Link                                                                                                    |
-|----------------------|---------------------------------------------------------------------------------------------------------|
-| CoronaTracker API    | https://api.coronatracker.com                                                                           |
-| COVID-19 Postman API | https://covid-19-apis.postman.com/                                                                      |
-| COVID-19 Rapid API   | https://rapidapi.com/api-sports/api/covid-193?endpoint=apiendpoint_dfb9e52d-bd90-48ec-a571-8b78610a736d |
-
-### Tools
-
-| Name                 | Link                                                |
-|----------------------|-----------------------------------------------------|
-| nodejs-starter       | https://github.com/MLH/mlh-hackathon-nodejs-starter |
-| rails-devise-graphql | https://github.com/zauberware/rails-devise-graphql  |
-| microAuth            | https://github.com/Gingernaut/microAuth             |
-
-## Awesome perks from our sponsors!
-
-Deployment
-- [DigitalOcean](https://do.co/forkwell)
-
-E-learning
-- [Microsoft Learn](https://aka.ms/learn)
-
-## Help us organize better
-
-Feel free to open issues if you find anything lacking and we appreciate your feedback greatly!
-
-## Community
-
-Join the community!
-- [Discord](https://discord.gg/jFjbXqp)
-- [Forkwell Facebook Group](https://facebook.com/groups/forkwellcoronavirushack/)
+<br />
 
