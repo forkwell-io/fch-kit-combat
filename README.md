@@ -18,7 +18,7 @@ A prototype platform that connects people to their nearest health care instituti
 ### Built using
 - [Reactjs](https://reactjs.org/)
 - [Material UI](https://material-ui.com/)
-- [Netlify](https://firebase.google.com/)
+- [Netlify](https://www.netlify.com/)
 - [Microsoft Azure](https://azure.microsoft.com/en-us/)
 
 
