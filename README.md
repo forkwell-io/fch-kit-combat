@@ -1,5 +1,5 @@
 <p align="center">
-<a href="https://designrevision.com/downloads/shards-dashboard-lite-react/">
+<a href="https://forkwell-covnect.netlify.com/">
 <img src="assets/preview.png" width="250" />
 </a>
 </p>
