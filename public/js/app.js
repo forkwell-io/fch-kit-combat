@@ -53057,8 +53057,8 @@ var render = function() {
       _c(
         "div",
         {
-          staticClass: "overlay-top-right zi-overlay",
-          staticStyle: { width: "20rem" }
+          staticClass: "overlay-top-right",
+          staticStyle: { width: "20rem", "z-index": "500" }
         },
         [_vm._t("default")],
         2

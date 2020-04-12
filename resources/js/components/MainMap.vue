@@ -1,7 +1,7 @@
 <template>
     <div class="wh-100" style="position: relative;">
         <div id="map" class="wh-100"></div>
-        <div class="overlay-top-right zi-overlay" style="width: 20rem;">
+        <div class="overlay-top-right" style="width: 20rem; z-index: 500;">
             <slot></slot>
         </div>
     </div>
