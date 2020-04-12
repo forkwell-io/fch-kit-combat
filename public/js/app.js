@@ -2059,37 +2059,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 
 
-var markerIcon = leaflet__WEBPACK_IMPORTED_MODULE_1___default.a.icon({
-  iconUrl: '../../img/markers/marker-red.png',
-  iconSize: [48, 48],
-  iconAnchor: [23, 48],
-  popupAnchor: [0, -48],
-  shadowUrl: '../../img/markers/marker-shadow.png',
-  shadowSize: [48, 48],
-  shadowAnchor: [23, 48]
-});
-var userMarkerIcon = leaflet__WEBPACK_IMPORTED_MODULE_1___default.a.icon({
-  iconUrl: '../../img/markers/marker-purple.png',
-  iconSize: [48, 48],
-  iconAnchor: [23, 48],
-  popupAnchor: [0, -48],
-  shadowUrl: '../../img/markers/marker-shadow.png',
-  shadowSize: [48, 48],
-  shadowAnchor: [23, 48]
-});
-var selectionMarkerIcon = leaflet__WEBPACK_IMPORTED_MODULE_1___default.a.icon({
-  iconUrl: '../../img/markers/marker-blue.png',
-  iconSize: [48, 48],
-  iconAnchor: [23, 48],
-  popupAnchor: [0, -48],
-  shadowUrl: '../../img/markers/marker-shadow.png',
-  shadowSize: [48, 48],
-  shadowAnchor: [23, 48]
-});
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['loginUrl', 'fetchMarkerUrl', 'createMarkerUrl', 'userName'],
+  props: ['assetUrl', 'loginUrl', 'fetchMarkerUrl', 'createMarkerUrl', 'userName'],
   data: function data() {
     return {
+      markerIcon: null,
+      userMarkerIcon: null,
+      selectionMarkerIcon: null,
       map: null,
       markersLayer: null,
       heatLayer: null,
@@ -2102,7 +2078,35 @@ var selectionMarkerIcon = leaflet__WEBPACK_IMPORTED_MODULE_1___default.a.icon({
     var _this = this;
 
     // Toastr settings
-    toastr__WEBPACK_IMPORTED_MODULE_2___default.a.options.positionClass = 'toast-bottom-right'; // Load map
+    toastr__WEBPACK_IMPORTED_MODULE_2___default.a.options.positionClass = 'toast-bottom-right'; // Marker settings
+
+    this.markerIcon = leaflet__WEBPACK_IMPORTED_MODULE_1___default.a.icon({
+      iconUrl: this.assetUrl + 'img/markers/marker-red.png',
+      iconSize: [48, 48],
+      iconAnchor: [23, 48],
+      popupAnchor: [0, -48],
+      shadowUrl: this.assetUrl + 'img/markers/marker-shadow.png',
+      shadowSize: [48, 48],
+      shadowAnchor: [23, 48]
+    });
+    this.userMarkerIcon = leaflet__WEBPACK_IMPORTED_MODULE_1___default.a.icon({
+      iconUrl: this.assetUrl + 'img/markers/marker-purple.png',
+      iconSize: [48, 48],
+      iconAnchor: [23, 48],
+      popupAnchor: [0, -48],
+      shadowUrl: this.assetUrl + 'img/markers/marker-shadow.png',
+      shadowSize: [48, 48],
+      shadowAnchor: [23, 48]
+    });
+    this.selectionMarkerIcon = leaflet__WEBPACK_IMPORTED_MODULE_1___default.a.icon({
+      iconUrl: this.assetUrl + 'img/markers/marker-blue.png',
+      iconSize: [48, 48],
+      iconAnchor: [23, 48],
+      popupAnchor: [0, -48],
+      shadowUrl: this.assetUrl + 'img/markers/marker-shadow.png',
+      shadowSize: [48, 48],
+      shadowAnchor: [23, 48]
+    }); // Load map
 
     this.map = leaflet__WEBPACK_IMPORTED_MODULE_1___default.a.map('map').setView([0, 0], 2); // Load tile
 
@@ -2145,7 +2149,7 @@ var selectionMarkerIcon = leaflet__WEBPACK_IMPORTED_MODULE_1___default.a.icon({
                 heatData = [];
                 res.data.forEach(function (r) {
                   leaflet__WEBPACK_IMPORTED_MODULE_1___default.a.marker([r.latitude, r.longitude], {
-                    icon: r.name == _this2.userName ? userMarkerIcon : markerIcon
+                    icon: r.name == _this2.userName ? _this2.userMarkerIcon : _this2.markerIcon
                   }).addTo(_this2.markersLayer).bindPopup("<b>".concat(r.name, "</b><br>").concat(r.latitude, ", ").concat(r.longitude));
                   heatData.push([r.latitude, r.longitude, 100]);
                 });
@@ -2183,7 +2187,7 @@ var selectionMarkerIcon = leaflet__WEBPACK_IMPORTED_MODULE_1___default.a.icon({
 
       if (this.selectionMarker == null) {
         var options = {
-          icon: selectionMarkerIcon,
+          icon: this.selectionMarkerIcon,
           draggable: true
         };
         this.selectionMarker = leaflet__WEBPACK_IMPORTED_MODULE_1___default.a.marker([this.lat, this.lng], options).addTo(this.map).bindPopup(popup).openPopup();
@@ -2231,9 +2235,12 @@ var selectionMarkerIcon = leaflet__WEBPACK_IMPORTED_MODULE_1___default.a.icon({
             _this4.selectionMarker = null; // Add marker
 
             var options = {
-              icon: userMarkerIcon
+              icon: _this4.userMarkerIcon
             };
             leaflet__WEBPACK_IMPORTED_MODULE_1___default.a.marker([_this4.lat, _this4.lng], options).addTo(_this4.markersLayer).bindPopup("<b>".concat(_this4.userName, "</b><br>").concat(_this4.lat, ", ").concat(_this4.lng));
+
+            _this4.heatLayer.addLatLng([_this4.lat, _this4.lng, 100]);
+
             break;
 
           case 'no_credits':

@@ -11,38 +11,9 @@
     import L from 'leaflet';
     import toastr from 'toastr';
 
-    const markerIcon = L.icon({
-        iconUrl: '../../img/markers/marker-red.png',
-        iconSize: [48, 48],
-        iconAnchor: [23, 48],
-        popupAnchor: [0, -48],
-        shadowUrl: '../../img/markers/marker-shadow.png',
-        shadowSize: [48, 48],
-        shadowAnchor: [23, 48]
-    });
-
-    const userMarkerIcon = L.icon({
-        iconUrl: '../../img/markers/marker-purple.png',
-        iconSize: [48, 48],
-        iconAnchor: [23, 48],
-        popupAnchor: [0, -48],
-        shadowUrl: '../../img/markers/marker-shadow.png',
-        shadowSize: [48, 48],
-        shadowAnchor: [23, 48]
-    });
-    
-    const selectionMarkerIcon = L.icon({
-        iconUrl: '../../img/markers/marker-blue.png',
-        iconSize: [48, 48],
-        iconAnchor: [23, 48],
-        popupAnchor: [0, -48],
-        shadowUrl: '../../img/markers/marker-shadow.png',
-        shadowSize: [48, 48],
-        shadowAnchor: [23, 48]
-    });
-
     export default {
         props: [
+            'assetUrl',
             'loginUrl',
             'fetchMarkerUrl',
             'createMarkerUrl',
@@ -50,6 +21,10 @@
         ],
         data() {
             return {
+                markerIcon: null,
+                userMarkerIcon: null,
+                selectionMarkerIcon: null,
+
                 map: null,
                 markersLayer: null,
                 heatLayer: null,
@@ -61,6 +36,38 @@
         mounted() {
             // Toastr settings
             toastr.options.positionClass = 'toast-bottom-right';
+
+
+            // Marker settings
+            this.markerIcon = L.icon({
+                iconUrl: this.assetUrl + 'img/markers/marker-red.png',
+                iconSize: [48, 48],
+                iconAnchor: [23, 48],
+                popupAnchor: [0, -48],
+                shadowUrl: this.assetUrl + 'img/markers/marker-shadow.png',
+                shadowSize: [48, 48],
+                shadowAnchor: [23, 48]
+            });
+
+            this.userMarkerIcon = L.icon({
+                iconUrl: this.assetUrl + 'img/markers/marker-purple.png',
+                iconSize: [48, 48],
+                iconAnchor: [23, 48],
+                popupAnchor: [0, -48],
+                shadowUrl: this.assetUrl + 'img/markers/marker-shadow.png',
+                shadowSize: [48, 48],
+                shadowAnchor: [23, 48]
+            });
+            
+            this.selectionMarkerIcon = L.icon({
+                iconUrl: this.assetUrl + 'img/markers/marker-blue.png',
+                iconSize: [48, 48],
+                iconAnchor: [23, 48],
+                popupAnchor: [0, -48],
+                shadowUrl: this.assetUrl + 'img/markers/marker-shadow.png',
+                shadowSize: [48, 48],
+                shadowAnchor: [23, 48]
+            });
 
             // Load map
             this.map = L.map('map').setView([0, 0], 2);
@@ -99,7 +106,7 @@
                 let heatData = [];
 
                 res.data.forEach(r => {
-                    L.marker([r.latitude, r.longitude], {icon: r.name==this.userName ? userMarkerIcon : markerIcon}).addTo(this.markersLayer)
+                    L.marker([r.latitude, r.longitude], {icon: r.name==this.userName ? this.userMarkerIcon : this.markerIcon}).addTo(this.markersLayer)
                         .bindPopup(`<b>${r.name}</b><br>${r.latitude}, ${r.longitude}`);
                     
                     heatData.push([r.latitude, r.longitude, 100]);
@@ -132,7 +139,7 @@
                 
                 if (this.selectionMarker == null) {
                     const options = {
-                        icon: selectionMarkerIcon,
+                        icon: this.selectionMarkerIcon,
                         draggable: true,
                     };
 
@@ -191,10 +198,12 @@
 
                             // Add marker
                             const options = {
-                                icon: userMarkerIcon,
+                                icon: this.userMarkerIcon,
                             };
                             L.marker([this.lat, this.lng], options).addTo(this.markersLayer)
                                 .bindPopup(`<b>${this.userName}</b><br>${this.lat}, ${this.lng}`);
+                            
+                            this.heatLayer.addLatLng([this.lat, this.lng, 100]);
                             break;
                         case 'no_credits':
                             toastr.warning('You have used up all your credits for today.', 'No Credits!');
