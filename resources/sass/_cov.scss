@@ -1,0 +1,49 @@
+.cov {
+    font-family: 'Ubuntu', sans-serif;
+    width: 100%;
+    padding: 2rem;
+    text-align: center;
+    background-color: white;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+
+    .cov-title {
+        margin-bottom: 2rem;
+    }
+
+    .cov-card {
+        padding: 1rem;
+        padding-bottom: 0.5rem;
+        margin-top: 1rem;
+        border-radius: 10px;
+        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+
+        .cov-card-title {
+            margin: 0;
+            font-weight: 500;
+        }
+
+        .cov-card-value {
+            margin: 0;
+            font-size: xx-large;
+            font-weight: bold;
+        }
+    }
+
+    .cov-red {
+        background-color: rgba(255, 0, 0, 0.1);
+        border-bottom: 10px solid rgba(255, 0, 0, 0.2);
+        color: rgba(230, 50, 50, 1);
+    }
+
+    .cov-green {
+        background-color: rgba(0, 200, 0, 0.1);
+        border-bottom: 10px solid rgba(0, 200, 0, 0.2);
+        color: rgba(50, 180, 50, 1);
+    }
+
+    .cov-blue {
+        background-color: rgba(0, 0, 255, 0.1);
+        border-bottom: 10px solid rgba(0, 0, 255, 0.2);
+        color: rgba(50, 50, 230, 1);
+    }
+}
