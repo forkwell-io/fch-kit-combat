@@ -1,8 +1,8 @@
-<p align="center">
+<h1 align="center">
 <a href="https://forkwell-covnect.netlify.com/">
 COVNEXT
 </a>
-</p>
+</h1>
 
 <h1 align="center" style="border-bottom: none !important; margin-bottom: 5px !important;"><a href="https://designrevision.com/downloads/shards-dashboard-lite-react/">Integrated Design Project</a></h1>
 <p align="center">
