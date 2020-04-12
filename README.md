@@ -1,6 +1,6 @@
 <p align="center">
 <a href="https://forkwell-covnect.netlify.com/">
-<img src="assets/preview.png" width="250" />
+COVNEXT
 </a>
 </p>
 
