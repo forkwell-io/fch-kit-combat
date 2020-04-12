@@ -12,6 +12,7 @@ import 'typeface-roboto';
 import { colors } from '@material-ui/core';
 import SvgIcon from '@material-ui/core/SvgIcon';
 import { Divider } from '@material-ui/core';
+import ContainedButtons from "../components/ButtonView"
 
 
 const useStyles = makeStyles((theme) => ({
@@ -71,13 +72,13 @@ const useStyles = makeStyles((theme) => ({
     color:'white'
   },
   hr:{
-      width:800,
+      width:700,
       height:5,
   },
 
   hr2:{
     marginTop:theme.spacing(2),
-    width:800,
+    width:700,
     height:5,
   }
 }));
@@ -92,7 +93,7 @@ export default function SpacingGrid() {
   return (
     <Grid container className={classes.root} >
       <Grid item lg={8}>
-          <h1 className={classes.firsttext}> COVEY CORONA BOT</h1>
+          <h1 className={classes.firsttext}> COVNECT</h1>
           <Divider className={classes.hr}/>
           
           <h2>
@@ -125,9 +126,10 @@ export default function SpacingGrid() {
                  <Divider className={classes.hr2}/>
                 </span>
             </h2>
+            {/*<ContainedButtons></ContainedButtons>*/}
         </Grid>
         <Grid item lg={4} className = {classes.chatinterface}>
-           <iframe src="https://forkwell.azurewebsites.net/" height="650" width="500" align="right" />
+           <iframe src="https://forkwell.azurewebsites.net/" height="575" width="500" align="right" />
         </Grid>
     </Grid>
   );
