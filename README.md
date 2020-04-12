@@ -11,7 +11,7 @@ A prototype platform that connects people to their nearest health care instituti
 
 <p align="center">
   <a href="https://forkwell-covnect.netlify.com/">
-    <img height="55px" src="assets/btn-live-preview.png" />
+    <img height="55px" src="btn-live-preview.png" />
   </a>
 </p>
 
