@@ -1,0 +1,55 @@
+<main class="scrollable">
+  <div class="content-frame">
+    <div class="content-area">
+      <div style="display: flex; align-items: center; margin-bottom: 14px;">
+        <span mdcHeadline6>My Requests</span>
+        <span style="flex-grow: 1;"></span>
+        <span>
+          <button
+            routerLink="/agency/request-contribution"
+            mdc-button raised>Add Request</button>
+        </span>
+      </div>
+
+      <mdc-card>
+        <div *ngIf="isLoading"
+             style="margin: 24px">
+          <mdc-linear-progress></mdc-linear-progress>
+        </div>
+        <mdc-data-table *ngIf="!isLoading"
+                        class="no-border">
+          <table mdcDataTableTable>
+            <thead>
+            <tr mdcDataTableHeaderRow>
+              <th mdcDataTableHeaderCell>Status</th>
+              <th mdcDataTableHeaderCell>Created at</th>
+              <th mdcDataTableHeaderCell>Items</th>
+              <th
+                style="text-align: center;"
+                mdcDataTableHeaderCell>Need / Fulfilled</th>
+            </tr>
+            </thead>
+            <tbody mdcDataTableContent>
+            <tr
+              *ngFor="let item of requestsPrecomputed;"
+              [routerLink]="['/agency/requests', item.request.id]"
+              style="cursor: pointer;"
+              mdcDataTableRow>
+              <td mdcDataTableCell>
+                <div style="display: flex; flex-direction: row; align-items: center">
+                  <mdc-icon>{{item.meta.icon}}</mdc-icon>
+                </div>
+              </td>
+              <td mdcDataTableCell>{{item.request.dateCrt.toDate().toLocaleDateString()}}</td>
+              <td mdcDataTableCell>{{item.meta.summary}}</td>
+              <td
+                align="center"
+                mdcDataTableCell>{{item.meta.qtyNeed}} / {{item.meta.qtyFilled}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </mdc-data-table>
+      </mdc-card>
+    </div>
+  </div>
+</main>

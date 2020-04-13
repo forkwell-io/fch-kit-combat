@@ -1,0 +1,32 @@
+<main class="scrollable">
+  <div *ngIf="isLoading"
+       style="height: 0">
+    <mdc-linear-progress></mdc-linear-progress>
+  </div>
+  <div *ngIf="!isLoading" class="content-frame">
+    <div style="display: flex; margin: 16px; flex-direction: column">
+      <mdc-card *ngIf="agency">
+        <div style="margin: auto; width: 100%; max-width: 360px">
+          <form (ngSubmit)="save()"
+                [formGroup]="formGroup" style="display: flex; width: 100%; flex-direction: column; margin: 24px 16px">
+            <mdc-form-field>
+              <mdc-text-field disabled formControlName="name" label="Agency name" outlined
+                              spellcheck="false"></mdc-text-field>
+            </mdc-form-field>
+            <mdc-form-field>
+              <mdc-text-field formControlName="phone" label="Phone" outlined spellcheck="false"></mdc-text-field>
+            </mdc-form-field>
+            <mdc-form-field style="margin-top: 16px">
+              <mdc-textarea formControlName="address" fullwidth label="Address" outlined rows="5"
+                            spellcheck="false"></mdc-textarea>
+            </mdc-form-field>
+            <button [disabled]="!formGroup.valid || isUpdating" mdc-button outlined
+                    style="margin-top: 16px"
+                    type="submit">Save
+            </button>
+          </form>
+        </div>
+      </mdc-card>
+    </div>
+  </div>
+</main>

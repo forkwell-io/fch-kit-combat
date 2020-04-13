@@ -1,0 +1,67 @@
+@use '@material/button';
+
+.demo-card__media {
+  background-image: url(https://material-components-web.appspot.com/images/1-1.jpg);
+}
+
+.demo-card__media--16-9 {
+  background-image: url(https://material-components-web.appspot.com/images/16-9.jpg);
+}
+
+
+.curr-page {
+  max-width: 70vw;
+  width: 70vw;
+  //overflow-y: auto;
+  //height: 100vh;
+  color: #37474f;
+  //padding:10vw;
+}
+
+.pg-landing {
+  text-align: center;
+  //height: 30vh;
+  //height: 15vh;
+}
+
+.pg-landing-content-container {
+  text-align: center;
+
+}
+
+.overview-container {
+  //padding-top: 20vh;
+  align-items: center;
+}
+
+.line-divider {
+  //padding-top:30vh;
+  padding-top: 5vh;
+}
+
+.see-more--card {
+  background-color: transparent;
+  //background-color: rgba(0, 0, 0, 0.04);
+  box-shadow: none;
+}
+
+.see-more--card-action {
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.request-item--info {
+  cursor: pointer;
+}
+
+//noinspection SassScssUnresolvedMixin
+.mdc-button.intro {
+  @include button.ink-color(white);
+  @include button.outline-color(white);
+  @include button.outline-width(2px, 24px);
+  @include button.height(56px);
+  @include button.shape-radius(28px);
+}

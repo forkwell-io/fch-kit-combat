@@ -1,0 +1,30 @@
+<main>
+  <div style="height: 1px; background-color: rgba(0, 0, 0, 0.12)">
+    <mdc-linear-progress *ngIf="isLoading"></mdc-linear-progress>
+  </div>
+  <div class="content">
+    <mdc-card *ngIf="agency" class="item">
+      <div style="display: flex; margin: 16px">
+        <div class="agency-photo"></div>
+        <div style="display: flex; flex-direction: column; margin: auto 16px auto">
+          <span mdcHeadline6>{{agency.name}}</span>
+          <span mdcBody2>{{agency.email}}</span>
+        </div>
+      </div>
+      <div style="display: flex; padding: 0 0 0 96px; flex-direction: column">
+        <span mdcCaption>Address</span>
+        <span>{{agency.address}}</span>
+        <span mdcCaption style="margin-top: 8px">Contact</span>
+        <span>{{agency.phone}}</span>
+      </div>
+      <div style="display: flex; padding: 24px 0 36px 96px">
+        <button (click)="accept(agency.userId)" [disabled]="isLoading" mdc-button
+                style="margin-right: 8px" unelevated>Accept
+        </button>
+        <button (click)="reject(agency.userId)" [disabled]="isLoading" mdc-button
+                outlined style="margin-right: 8px">Reject
+        </button>
+      </div>
+    </mdc-card>
+  </div>
+</main>

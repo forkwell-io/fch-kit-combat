@@ -1,0 +1,68 @@
+<form (ngSubmit)="createUserAccount()" [formGroup]="formGroup" style="display: flex; flex-direction: column;">
+  <div style="display: flex; margin: 0 auto 24px;">
+    <mdc-icon style="width: 48px; height: 48px; margin: auto;">share</mdc-icon>
+    <div style="display: flex; flex-direction: column; margin: auto 0 auto 16px">
+      <span mdcHeadline5>Register as an agency</span>
+      <span mdcBody1>with your email</span>
+    </div>
+  </div>
+  <div style="display: flex">
+    <div style="flex: 1">
+      <mdc-form-field>
+        <mdc-text-field autocomplete="name" formControlName="name" label="Agency name" name="name" outlined
+                        spellcheck="false"></mdc-text-field>
+        <mdc-helper-text persistent validation>
+          <span *ngIf="formGroup.controls.name.hasError('required')">Enter the agency name</span>
+        </mdc-helper-text>
+      </mdc-form-field>
+      <mdc-form-field>
+        <mdc-text-field autocomplete="tel" formControlName="contact" label="Contact" name="phone" outlined
+                        spellcheck="false"></mdc-text-field>
+        <mdc-helper-text persistent validation>
+          <span *ngIf="formGroup.controls.contact.hasError('required')">Enter a contact number</span>
+        </mdc-helper-text>
+      </mdc-form-field>
+      <mdc-form-field>
+        <mdc-text-field autocomplete="email" formControlName="email" label="Email" name="email" outlined
+                        spellcheck="false"></mdc-text-field>
+        <mdc-helper-text persistent validation>
+          <span *ngIf="formGroup.controls.email.hasError('required')">Enter your email address</span>
+          <span *ngIf="formGroup.controls.email.hasError('email')">Enter a valid email address</span>
+        </mdc-helper-text>
+      </mdc-form-field>
+      <mdc-form-field>
+        <mdc-text-field [type]="showPassword ? 'text' : 'password'" autocomplete="new-password"
+                        formControlName="password"
+                        label="Password"
+                        name="password"
+                        outlined>
+        </mdc-text-field>
+        <mdc-helper-text persistent validation>
+          <span *ngIf="formGroup.controls.password.hasError('required')">Enter your password</span>
+          <span *ngIf="formGroup.controls.password.hasError('minlength')">Password too weak</span>
+        </mdc-helper-text>
+      </mdc-form-field>
+      <mdc-form-field>
+        <mdc-text-field [type]="showPassword ? 'text' : 'password'" autocomplete="new-password"
+                        formControlName="confirmPassword" label="Confirm password"
+                        name="password"
+                        outlined>
+          <button (click)="togglePasswordVisibility()" mdc-icon-button mdcTextFieldIcon trailing type="button">
+            <mdc-icon>{{showPassword ? 'visibility' : 'visibility_off'}}</mdc-icon>
+          </button>
+        </mdc-text-field>
+        <mdc-helper-text persistent validation>Repeat password</mdc-helper-text>
+      </mdc-form-field>
+    </div>
+    <div style="flex: 1; margin-left: 8px">
+      <mdc-form-field>
+        <mdc-textarea formControlName="address" fullwidth label="Address" name="address" outlined rows="10"
+                      spellcheck="false"></mdc-textarea>
+      </mdc-form-field>
+    </div>
+  </div>
+  <div style="display: flex; margin-top: 16px; justify-content: space-between; flex-flow: wrap;">
+    <button mdc-button routerLink="/auth" style="margin-top: 8px;" type="button">Already have an account?</button>
+    <button [disabled]="!formGroup.valid" mdc-button raised style="margin-top: 8px;" type="submit">Sign up</button>
+  </div>
+</form>

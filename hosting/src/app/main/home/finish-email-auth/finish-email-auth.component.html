@@ -1,0 +1,36 @@
+<main>
+  <mdc-card style="margin: 24px auto;">
+    <form (ngSubmit)="next()" [formGroup]="formGroup"
+          style="display: flex; flex-direction: column">
+      <mdc-form-field style="width: 280px; margin: 16px 16px 0">
+        <mdc-text-field formControlName="email" label="Email"
+                        outlined></mdc-text-field>
+      </mdc-form-field>
+      <mdc-form-field style="width: 280px; margin: 0 16px 0">
+        <mdc-text-field [type]="showPassword ? 'text' : 'password'" autocomplete="new-password"
+                        formControlName="password"
+                        label="Password"
+                        name="password"
+                        outlined>
+        </mdc-text-field>
+        <mdc-helper-text persistent validation>
+          <span *ngIf="formGroup.controls.password.hasError('required')">Enter your password</span>
+          <span *ngIf="formGroup.controls.password.hasError('minlength')">Password too weak</span>
+        </mdc-helper-text>
+      </mdc-form-field>
+      <mdc-form-field style="width: 280px; margin: 0 16px 16px">
+        <mdc-text-field [type]="showPassword ? 'text' : 'password'" autocomplete="new-password"
+                        formControlName="confirmPassword" label="Confirm password"
+                        name="password"
+                        outlined>
+          <button (click)="togglePasswordVisibility()" mdc-icon-button mdcTextFieldIcon trailing type="button">
+            <mdc-icon>{{showPassword ? 'visibility' : 'visibility_off'}}</mdc-icon>
+          </button>
+        </mdc-text-field>
+        <mdc-helper-text persistent validation>Repeat password</mdc-helper-text>
+      </mdc-form-field>
+      <button [disabled]="!formGroup.valid" mdc-button style="margin: 0 16px 16px" type="submit" unelevated>Next
+      </button>
+    </form>
+  </mdc-card>
+</main>

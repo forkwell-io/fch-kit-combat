@@ -1,0 +1,26 @@
+<mdc-dialog>
+  <mdc-dialog-container>
+    <mdc-dialog-surface style="min-width: 520px; max-width: 640px;">
+      <ng-container *ngIf="messageDocument; else emptyState">
+        <mdc-dialog-title>Message</mdc-dialog-title>
+        <mdc-dialog-content>
+          <p style="margin-bottom: 0;">From: <b>{{messageDocument.sender.name}}</b>
+          <span mdcCaption>
+            <{{messageDocument.sender.email}} / {{messageDocument.sender.phone}}>
+          </span>
+          </p>
+          <p style="margin: 0;" mdcCaption>
+            {{messageDocument.dateCrt.toDate()}}
+          </p>
+          <p>{{messageDocument.content}}</p>
+        </mdc-dialog-content>
+        <mdc-dialog-actions>
+          <button mdcDialogButton mdcDialogAction="close">Close Message</button>
+        </mdc-dialog-actions>
+      </ng-container>
+      <ng-template #emptyState>
+        <mdc-linear-progress></mdc-linear-progress>
+      </ng-template>
+    </mdc-dialog-surface>
+  </mdc-dialog-container>
+</mdc-dialog>

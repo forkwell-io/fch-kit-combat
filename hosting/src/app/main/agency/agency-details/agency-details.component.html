@@ -1,0 +1,26 @@
+
+<mdc-card *ngIf="agency">
+  <div style="display: flex; flex-direction: row; margin: 24px; align-items: center">
+    <mdc-card outlined style="width: 144px; height: 144px; border-radius: 72px">
+      <mdc-card-primary-action style="width: 100%; height: 100%"></mdc-card-primary-action>
+    </mdc-card>
+    <div style="display: flex; flex-direction: column; margin-left: 24px">
+      <span mdcHeadline4>{{agency.name}}</span>
+      <div style="display: flex; flex-direction: row; margin-top: 8px; align-items: center">
+        <mdc-icon>email</mdc-icon>
+        <span mdcBody2 style="margin-left: 8px">{{agency.email}}</span>
+        <mdc-icon style="margin-left: 16px">phone</mdc-icon>
+        <span mdcBody2 style="margin-left: 8px">{{agency.phone}}</span>
+      </div>
+      <div>
+        <button mdc-button outlined routerLink="/agency/details/edit"
+                style="margin-top: 16px">Edit details
+        </button>
+      </div>
+    </div>
+  </div>
+  <div style="display: flex; flex-direction: column; margin: 0 24px 36px 192px">
+    <span mdcCaption>Address</span>
+    <span mdcBody1>{{agency.address}}</span>
+  </div>
+</mdc-card>

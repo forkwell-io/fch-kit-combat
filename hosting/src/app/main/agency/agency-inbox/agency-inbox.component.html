@@ -1,0 +1,33 @@
+<main class="scrollable">
+  <div class="content-frame">
+    <div class="content-area">
+      <mdc-card>
+        <div *ngIf="isLoading"
+             style="margin: 24px">
+          <span mdcCaption>Loading data&#8230;</span>
+        </div>
+        <mdc-data-table *ngIf="!isLoading"
+                        class="no-border">
+          <table mdcDataTableTable>
+            <thead>
+            <tr mdcDataTableHeaderRow>
+              <th mdcDataTableHeaderCell>Name</th>
+              <th mdcDataTableHeaderCell>Subject</th>
+              <th mdcDataTableHeaderCell>Date</th>
+            </tr>
+            </thead>
+            <tbody mdcDataTableContent>
+            <tr
+              (click)="showMessage(item)"
+              *ngFor="let item of messages" mdcDataTableRow class="{{item.status === 'unread' ? 'unread' : 'read'}}">
+              <td mdcDataTableCell>{{item.sender.name}}</td>
+              <td mdcDataTableCell>{{item.subject}}</td>
+              <td mdcDataTableCell>{{item.dateCrt.toDate().toLocaleDateString()}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </mdc-data-table>
+      </mdc-card>
+    </div>
+  </div>
+</main>

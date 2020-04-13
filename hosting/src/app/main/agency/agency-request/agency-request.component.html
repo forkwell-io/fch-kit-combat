@@ -1,0 +1,141 @@
+<main class="scrollable">
+  <div class="content-frame">
+    <div style="display: flex; margin: 16px; flex-direction: column">
+      <mdc-card style="width: 100%; overflow: hidden">
+        <div style="display: flex; height: 480px; flex-direction: row">
+          <div style="display: flex; flex: 1; flex-direction: column">
+            <div style="display: flex; flex-direction: row; margin: 24px; justify-content: flex-end">
+              <div style="display: flex; align-items: flex-start; flex-direction: column; margin-right: 24px">
+                <span mdcHeadline5>Request progress</span>
+                <span mdcCaption>Completion: {{sum > 0 ? (progress + '%') : 'Unavailable'}}</span>
+              </div>
+              <button (click)="reloadData()" [disabled]="isLoadingRequestItems || isDeleting" mdc-icon-button
+                      style="margin-left: auto">
+                <mdc-icon>refresh</mdc-icon>
+              </button>
+              <div #optionsAnchor mdcMenuSurfaceAnchor style="margin-left: 8px">
+                <button (click)="options.open = true"
+                        [disabled]="isLoadingRequestItems || isDeleting"
+                        mdc-icon-button>
+                  <mdc-icon>more_vert</mdc-icon>
+                </button>
+                <mdc-menu #options [anchorElement]="optionsAnchor" anchorCorner="bottomStart">
+                  <mdc-list style="width: 280px">
+                    <mdc-list-item [disabled]="isDeleting">
+                      <mdc-icon mdcListItemGraphic>done_all</mdc-icon>
+                      Mark as complete
+                    </mdc-list-item>
+                    <mdc-list-item (click)="delete()" [disabled]="isDeleting">
+                      <mdc-icon mdcListItemGraphic>delete_forever</mdc-icon>
+                      Delete forever
+                    </mdc-list-item>
+                  </mdc-list>
+                </mdc-menu>
+              </div>
+            </div>
+            <div style="display: flex; flex: 1; margin: 0 24px 24px">
+              <span *ngIf="isLoadingRequestItems" mdcCaption style="margin: auto">Loading chart&#8230;</span>
+              <div *ngIf="!isLoadingRequestItems && sum == 0" mdcCaption
+                   style="display: flex; flex-direction: row; align-items: center; margin: 0 24px 24px">
+                <mdc-icon>
+                  <img alt="" src="../../../../assets/vectors/undraw_create_f05x.svg" style="width: 280px">
+                </mdc-icon>
+                <div style="display: flex; flex-direction: column; margin-left: 16px">
+                  <span mdcHeadline4>No data</span>
+                  <span mdcCaption>There's not much going on here right now.</span>
+                  <button mdc-button outlined routerLink="/agency/request-contribution"
+                          style="margin-top: 16px">Need help?
+                  </button>
+                </div>
+              </div>
+              <google-chart *ngIf="!isLoadingRequestItems && sum > 0"
+                            [columnNames]="requestedItemsChartColumns"
+                            [data]="requestedItemsChart"
+                            [options]="chartOptions"
+                            style="width: 100%; height: 100%"
+                            type="BarChart">
+              </google-chart>
+            </div>
+          </div>
+          <div style="width: 1px; background-color: rgba(0, 0, 0, 0.12)"></div>
+          <div style="display: flex; width: 280px; flex-direction: column; overflow-y: auto">
+            <div style="flex: 1; overflow-y: auto">
+              <mdc-list *ngIf="!isLoadingRequestItems && requestedItems.length == 0" [interactive]="false">
+                <mdc-list-item mdcCaption style="text-align: center">No requested items</mdc-list-item>
+              </mdc-list>
+              <mdc-list *ngIf="isLoadingRequestItems" [interactive]="false">
+                <mdc-list-item disabled>
+                  <mdc-icon mdcListItemGraphic>query_builder</mdc-icon>
+                  <mdc-list-item-text secondaryText="Initializing&#8230;">Getting ready</mdc-list-item-text>
+                </mdc-list-item>
+              </mdc-list>
+              <mdc-list *ngIf="!isLoadingRequestItems && requestedItems.length > 0" twoLine>
+                <mdc-list-item (click)="showSpecificItem(item.name)" *ngFor="let item of requestedItems"
+                               [disabled]="isUpdating || isDeleting">
+                  <mdc-list-item-text
+                    secondaryText="Received {{item.qtyFilled}} of {{item.qtyNeed}} units">{{item.name}}</mdc-list-item-text>
+                </mdc-list-item>
+              </mdc-list>
+            </div>
+            <mdc-list-divider></mdc-list-divider>
+            <div>
+              <div *ngIf="!itemName" style="display: flex; flex-direction: column">
+                <span mdcCaption style="margin: 24px">Select requested item to view or update details</span>
+              </div>
+              <div *ngIf="itemName" style="display: flex; flex-direction: column">
+                <div style="display: flex; margin: 8px 16px 0 8px; align-items: center">
+                  <button (click)="clearSpecific()" [disabled]="isUpdating" mdc-icon-button>
+                    <mdc-icon>close</mdc-icon>
+                  </button>
+                  <span mdcSubtitle1 style="margin-left: 8px">{{itemName}}</span>
+                </div>
+                <google-chart *ngIf="itemName"
+                              [columnNames]="itemChartColumns"
+                              [data]="itemChart"
+                              [options]="itemOptions"
+                              style="width: 100%"
+                              type="PieChart">
+                </google-chart>
+                <mdc-text-field (change)="getItem(itemName).qtyFilled = +$event" [disabled]="isUpdating"
+                                [value]="itemReceivedCount" label="Count" min="0" step="1"
+                                style="margin: 16px 16px 0" type="number"></mdc-text-field>
+                <button (click)="update()" [disabled]="isUpdating" mdc-button outlined style="margin: 16px">Update
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mdc-card>
+      <span *ngIf="!isLoadingContributions" mdcHeadline5
+            style="margin: 24px 16px 16px; color: rgba(0, 0, 0, 0.54)">Contributions to this request</span>
+      <mdc-card *ngIf="!isLoadingContributions">
+        <mdc-data-table class="no-border">
+          <table mdcDataTableTable>
+            <thead>
+            <tr mdcDataTableHeaderRow>
+              <th mdcDataTableHeaderCell>Contributor</th>
+              <th mdcDataTableHeaderCell>Status</th>
+              <th mdcDataTableHeaderCell>Created at</th>
+              <th mdcDataTableHeaderCell>Items</th>
+              <th mdcDataTableHeaderCell>Total units</th>
+            </tr>
+            </thead>
+            <tbody mdcDataTableContent>
+            <tr *ngFor="let item of contributions" mdcDataTableRow>
+              <td mdcDataTableCell>{{item.sender.name}}</td>
+              <td mdcDataTableCell>
+                <div style="display: flex; flex-direction: row; align-items: center">
+                  <mdc-icon>{{resolveStatusIcon(item)}}</mdc-icon>
+                </div>
+              </td>
+              <td mdcDataTableCell>{{item.dateCrt.toDate().toLocaleDateString()}}</td>
+              <td mdcDataTableCell>{{summarizeRequiredItems(item)}}</td>
+              <td mdcDataTableCell>{{getCount(item)}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </mdc-data-table>
+      </mdc-card>
+    </div>
+  </div>
+</main>

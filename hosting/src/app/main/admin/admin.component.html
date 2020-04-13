@@ -1,0 +1,28 @@
+<div style="display: flex; height: 100%; overflow: hidden">
+  <mdc-drawer>
+    <mdc-drawer-content>
+      <mdc-list>
+        <mdc-list-item [routerLinkActiveOptions]="{exact: true}" routerLink="/admin/users"
+                       routerLinkActive="mdc-list-item--activated">
+          <mdc-icon mdcListItemGraphic>account_tree</mdc-icon>
+          <span>Users</span>
+        </mdc-list-item>
+        <mdc-list-divider></mdc-list-divider>
+        <mdc-list-group subheader="Manage agencies">
+          <mdc-list-item [routerLinkActiveOptions]="{exact: true}" routerLink="/admin/agencies"
+                         routerLinkActive="mdc-list-item--activated">
+            <mdc-icon mdcListItemGraphic>view_list</mdc-icon>
+            <span>Agencies</span>
+          </mdc-list-item>
+          <mdc-list-item routerLink="/admin/agency-member-requests" routerLinkActive="mdc-list-item--activated">
+            <mdc-icon mdcListItemGraphic>group</mdc-icon>
+            <span>Member requests {{memberRequestCount ? '(' + memberRequestCount + ')' : ''}}</span>
+          </mdc-list-item>
+        </mdc-list-group>
+      </mdc-list>
+    </mdc-drawer-content>
+  </mdc-drawer>
+  <div style="flex: 1; overflow: hidden">
+    <router-outlet></router-outlet>
+  </div>
+</div>

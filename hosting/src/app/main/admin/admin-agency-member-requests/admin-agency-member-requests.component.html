@@ -1,0 +1,31 @@
+<main>
+  <div class="toolbar">
+    <button mdc-button outlined routerLink="/admin/create-agency">
+      <mdc-icon>add</mdc-icon>
+      Register new agency
+    </button>
+  </div>
+  <div style="height: 1px; background-color: rgba(0, 0, 0, 0.12)">
+    <mdc-linear-progress *ngIf="isLoading"></mdc-linear-progress>
+  </div>
+  <div class="content">
+    <mdc-card *ngFor="let agency of agencies" class="item">
+      <div style="display: flex; margin: 16px">
+        <div class="agency-photo"></div>
+        <div style="display: flex; flex-direction: column; margin: auto 16px auto">
+          <span mdcHeadline6>{{agency.name}}</span>
+          <span mdcBody2>{{agency.email}}</span>
+        </div>
+        <button [routerLink]="['/admin/agency-member-requests', agency.userId]" mdc-button outlined
+                style="margin: auto 16px auto auto">
+          <mdc-icon>description</mdc-icon>
+          View
+        </button>
+      </div>
+      <div style="display: flex; padding: 0 0 24px 96px; flex-direction: column">
+        <span mdcCaption>Address</span>
+        <span>{{agency.address}}</span>
+      </div>
+    </mdc-card>
+  </div>
+</main>
