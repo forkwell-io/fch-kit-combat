@@ -4,7 +4,7 @@
 
 ## Team Members
 
-- Muhammad Firdaus bin Jamdi : https://github.com/firdausjamdi
+- [Linkedin](https://www.linkedin.com/in/mdaliakbar98/)Muhammad Firdaus bin Jamdi : https://github.com/firdausjamdi
 - Muhammad Ali Akbar bin Radzali : https://github.com/H0j3n
 - Muhammad Idham bin Idris : https://github.com/kaitorque
 - Sofea Hazirah bt Ishak : https://github.com/aefos27
