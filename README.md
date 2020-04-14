@@ -28,6 +28,7 @@ Our ultimate mission is to break the chain of infection and restore some kind of
  
  ### Home Screen
  ![Home - Safe](readme-resources/App-HomeSafe.png?raw=true)
+ 
  ![Home - Risk](readme-resources/App-HomeNotSafe.png?raw=true)
  
  ### Hotspots
@@ -35,7 +36,9 @@ Our ultimate mission is to break the chain of infection and restore some kind of
 
  ### Statistics
  ![Stats Home](readme-resources/App-StatsHome.png?raw=true)
+ 
  ![Stats Malaysia](readme-resources/App-StatsMAS.png?raw=true)
+
  ![Stats Global](readme-resources/App-StatsGlobal.png?raw=true)
 
  ### Admin Interface
