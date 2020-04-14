@@ -1,6 +1,6 @@
 # Forkwell Coronavirus Hack: Virus Combat
 
-[](1.png)
+[](https://github.com/H0j3n/fch-virus-combat/blob/master/1.png)
 
 ## Team Members
 
