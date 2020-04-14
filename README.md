@@ -10,6 +10,9 @@
 - Sofea Hazirah bt Ishak : https://github.com/aefos27
 - Nur Khadijah Safiy bt Mohamad Radzi : https://github.com/KhadijahSafiy
 
+## Prototype
+- [Link to Prototype](https://www.figma.com/proto/nIsg2chNvvzkY1AnwRKiWs/Virus-Combat?node-id=64%3A358&scaling=min-zoom)
+
 ## Introduction
   
 ![](2.png)
@@ -19,10 +22,6 @@
 ## Features
 
 ![](5.png)
-
-## Prototype
-
-- [Link to Prototype](https://www.figma.com/proto/nIsg2chNvvzkY1AnwRKiWs/Virus-Combat?node-id=64%3A358&scaling=min-zoom)
 
 ## Extra 
 
