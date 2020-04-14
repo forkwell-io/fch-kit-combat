@@ -43,6 +43,8 @@ module.exports = {
             }
         });
 
-        return infectionProximity
+        var jsonString = JSON.stringify({ ...infectionProximity })
+
+        return jsonString
     }
 };
