@@ -3,6 +3,8 @@
 
 [Prototype mockup on Adobe XD](https://xd.adobe.com/view/435d5f04-8c16-4021-5f7e-b2f00d05cc8a-356c/?fullscreen&hints=off "Mockup")
 
+[Presentation Video]( "Presentation Video")
+
 ## Team
 ### Team Name
 The Game Changer
@@ -23,6 +25,9 @@ Our ultimate mission is to break the chain of infection and restore some kind of
  1. Provide users with latest data and statistics on the pandemic.
  2. Notify users if they have potentially come into close contact or is a high risk of entering an area with confirmed cases.
  3. Enable users to be informed and take necessary precautions.
+
+## Functions
+Documentation of the project can be found [Project Documentation](readme-resources/chainbreaker-documentation.pdf "Presentation Video").
 
 ## Screenshots
  ### Login Screen
