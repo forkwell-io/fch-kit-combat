@@ -11,6 +11,8 @@ Hi! We are a team of 5 members consisting of:
 ## Topic Chosen
 Topic 2 &#8211; Virus Combat
 
+Report: https://docs.google.com/document/d/1sj6chHCMd7qJ3oH_zs1uHkyNcLvqaCgExKsCRCVmemo/edit?usp=sharing
+
 ## Solution: Web-based Application
 A medical resource sharing platform: [Sharing is Caring](https://neuon-hackathon-holmes.web.app/)
 
