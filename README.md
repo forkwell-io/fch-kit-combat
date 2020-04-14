@@ -1,7 +1,7 @@
 
 # Forkwell Coronavirus Hack: Virus Combat
 
-[Prototype mockup on Adobe XD](https://xd.adobe.com/view/4796888d-1efa-4d1b-6388-ef5e7f19c6e2-31a7/?fullscreen&hints=off "Mockup")
+[Prototype mockup on Adobe XD](https://xd.adobe.com/view/435d5f04-8c16-4021-5f7e-b2f00d05cc8a-356c/?fullscreen&hints=off "Mockup")
 
 ## Team
 ### Team Name
