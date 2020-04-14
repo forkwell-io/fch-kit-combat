@@ -12,8 +12,10 @@ Hi, Thank you for visiting. This project is made by Dr Quantum. We are participa
 - [Linkedin](https://www.linkedin.com/in/sofea-hazirah-ishak-667428197/) : Sofea Hazirah bt Ishak : https://github.com/aefos27
 - [Linkedin](https://www.linkedin.com/in/nur-khadijah-safiy-6427a8182/) : Nur Khadijah Safiy bt Mohamad Radzi : https://github.com/KhadijahSafiy
 
-## Prototype
+## Resources
 - [Link to Prototype](https://www.figma.com/proto/nIsg2chNvvzkY1AnwRKiWs/Virus-Combat?node-id=64%3A358&scaling=min-zoom)
+- [Link to Slide](https://github.com/H0j3n/fch-virus-combat/blob/master/WERTOO-OFFICIAL.pdf)
+- [Link to Video Presentation](https://www.youtube.com/watch?v=pzvGyfVugqI)
 
 ## Introduction
 
