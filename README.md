@@ -17,7 +17,7 @@ Hi, Thank you for visiting. This project is made by Dr Quantum. We are participa
 
 ## Introduction
 
-Due to the current pandemic, for most people, they are staying in their shelter. But, in the end of the day they still need to go outside, to buy goods for their own survival. People are feeling unsafe when going outside, afraid of the exposure of the Covid-19. 
+Due to the pandemic, social distancing is vital to prevent the infection of Covid-19. We believe, This practice will be continue even after the movement control order (MCO) because we’re not as free of infection risk as we were before.
 
 We develop a prototype of a mobile application that is called Wertoo or "where too?" The application is solution for public to facilitate their decision when going outside. Providing such extensive visualisation of crowd, getting report from crowdsourcing and identify the service provided at a particular premises.
   
