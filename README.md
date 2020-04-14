@@ -12,21 +12,21 @@
 
 ## Introduction
   
-[](2.png)
-[](3.png)
-[](4.png)
+![](2.png)
+![](3.png)
+![](4.png)
 
 ## Features
 
-[](5.png)
+![](5.png)
 
 ## Prototype
 
 - [Link to Prototype](https://www.figma.com/proto/nIsg2chNvvzkY1AnwRKiWs/Virus-Combat?node-id=64%3A358&scaling=min-zoom)
 
 
-[](6.png)
-[](7.png)
+![](6.png)
+![](7.png)
 
 
 
