@@ -1,0 +1,138 @@
+url="https://traxer-3453a.firebaseio.com/location%20data.json?&auh=tkW2SvvIRcK0nLtl2S8rGoMlhLzJeM4mKBGGOmPS"		
+
+
+//printing onto sheet
+function addJSON() {
+  var spread = SpreadsheetApp.getActiveSpreadsheet();
+  
+  var sheet = spread.getSheetByName("Sheet1").clearContents();
+  
+  
+  long = importJsonLong();
+  
+  
+  for(var i=0; i<long.length; i+=3){
+    var line = [];
+    for(var j=0; j<3; j++){  
+      line.push(long[i+j])
+   }
+    sheet.appendRow(line);
+ }
+  
+}
+
+
+
+//import,parse, extract longitude from nested JSON data
+function importJsonLong(){
+  
+  try{
+    
+    var res = UrlFetchApp.fetch(url);
+    var content = res.getContentText();
+    var data = JSON.parse(content);
+    var key = Object.keys(data);
+    
+    var subkey = Object.keys(data[key[0]]);
+    var loc = Object.keys(data[key[0]][subkey[0]]);
+    
+    
+    Logger.log(typeof(key));
+    //userID
+    Logger.log(key.length);
+    Logger.log(key[1]);
+    //sample instance
+    Logger.log(subkey[0]);
+    //sample instance lists of items
+    Logger.log(loc);
+    //userID.sampleInstance.longitude
+    Logger.log(data[key[0]][subkey[0]]["longitude"]);
+    
+    
+    var row = ["user","longitude", "latitude" ]; 
+    var userID = Object.keys(data);
+     
+    
+    
+
+    for(var i=0; i<userID.length; i++){
+      var j = 0;
+      var sample = Object.keys(data[userID[i]]);
+      
+      if(sample.length <10){  
+      while(j<sample.length){
+        row.push(i);
+        
+        row.push(data[userID[i]][sample[j]]["longitude"]);
+        
+        row.push(data[userID[i]][sample[j]]["latitude"]);
+        j+=1;;
+        
+      }
+      }
+      
+      if(sample.length >10 && sample.length <50){  
+      while(j<sample.length){
+        row.push(i);
+        
+        row.push(data[userID[i]][sample[j]]["longitude"]);
+        
+        row.push(data[userID[i]][sample[j]]["latitude"]);
+        j+=10;;
+        
+      }
+      }
+      
+      if(sample.length >50 && sample.length <100){  
+      while(j<sample.length){
+        row.push(i);
+        
+        row.push(data[userID[i]][sample[j]]["longitude"]);
+        
+        row.push(data[userID[i]][sample[j]]["latitude"]);
+        j+=150;
+        
+      }
+      }
+      
+      if(sample.length >100){  
+      while(j<sample.length){
+        row.push(i);
+        
+        row.push(data[userID[i]][sample[j]]["longitude"]);
+        
+        row.push(data[userID[i]][sample[j]]["latitude"]);
+        j+=300;
+        
+      }
+      }
+    }  
+         
+     
+    
+    if(typeof(row) === "undefined"){
+      return "Node Not Available";      
+    } 
+    
+    else if(typeof(row) === "object"){  
+      var tempArr = [];
+      
+      for(var i=0; i<row.length; i++){
+      tempArr.push(row[i]);
+    }
+      Logger.log(tempArr.length)
+      return tempArr; 
+    } 
+    
+    else if(typeof(row) !== "object") {
+      return row;
+    }
+  }
+  catch(err){
+      return "Error getting data";  
+  }
+
+}
+
+
+
