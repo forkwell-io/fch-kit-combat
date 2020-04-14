@@ -3,7 +3,7 @@
 
 [Prototype mockup on Adobe XD](https://xd.adobe.com/view/435d5f04-8c16-4021-5f7e-b2f00d05cc8a-356c/?fullscreen&hints=off "Mockup")
 
-[Presentation Video]( "Presentation Video")
+[Presentation Video](https://youtu.be/c3NvDRjQ38k "Presentation Video")
 
 ## Team
 ### Team Name
