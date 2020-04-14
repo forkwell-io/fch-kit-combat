@@ -26,8 +26,8 @@ Our ultimate mission is to break the chain of infection and restore some kind of
  2. Notify users if they have potentially come into close contact or is a high risk of entering an area with confirmed cases.
  3. Enable users to be informed and take necessary precautions.
 
-## Functions
-Documentation of the project can be found [Project Documentation](readme-resources/chainbreaker-documentation.pdf "Presentation Video").
+## Documentation
+Documentation of the project can be found [here](readme-resources/chainbreaker-documentation.pdf "Project Documentation").
 
 ## Screenshots
  ### Login Screen
