@@ -1,0 +1,23 @@
+{
+  "kind": "collectionType",
+  "connection": "default",
+  "collectionName": "locations",
+  "info": {
+    "name": "Locations"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "users": {
+      "via": "locations",
+      "plugin": "users-permissions",
+      "collection": "user",
+      "dominant": true
+    },
+    "coordinate": {
+      "type": "json"
+    }
+  }
+}

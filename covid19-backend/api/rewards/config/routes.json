@@ -1,0 +1,19 @@
+{
+  "routes": [{
+      "method": "GET",
+      "path": "/rewards",
+      "handler": "rewards.index",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/rewards",
+      "handler": "rewards.update",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}
