@@ -1,0 +1,19 @@
+{
+  "defaultConnection": "default",
+  "connections": {
+    "default": {
+      "connector": "mongoose",
+      "settings": {
+        "database": "covid19",
+        "host": "127.0.0.1",
+        "srv": false,
+        "port": 27017,
+        "username": "root",
+        "password": "root"
+      },
+      "options": {
+        "authenticationDatabase": "admin"
+      }
+    }
+  }
+}
