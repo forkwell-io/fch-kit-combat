@@ -52,6 +52,25 @@ This repo contains 2 source code:
 
 ## Getting started
 
+#### Tools used
+* Firebase
+  * Firebase Hosting (deployment)
+  * Cloud Firestore (database)
+  * Cloud Functions (backend logics)
+* Node.js
+* AngularJS
+* express.js
+
+#### Motivation
+* Rapid development
+* Free development quota 
+* Free web hosting
+* Enable building SPA
+* Loosely coupled component
+* Two way data binding
+* Reducing boilerplate code
+* Support Firebase libraries
+
 ### Configuring Firebase Functions (inside `./functions`)
 To run the functions, a Firebase project is required as described in [here](https://firebase.google.com/docs/functions/get-started).
 
