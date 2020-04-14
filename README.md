@@ -4,7 +4,7 @@
 Hi! We are a team of 5 members consisting of:
 * [Chang Yang Loong](https://github.com/changyangloong)
 * [Chan Teck Wei](https://github.com/chantw)
-* [Muhammad Danish Ezwan Mohd Nordin](https://github.com/coffeestains1908)
+* [Danish Ezwan](https://github.com/coffeestains1908)
 * [Teoh Shu Hong](https://github.com/Harlley7289)
 * [Sophia Anak Chulif @ Douglas Chulip](https://github.com/sophiadouglas)
 
