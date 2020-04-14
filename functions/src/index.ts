@@ -11,13 +11,10 @@ import {
 import {
     RequestItem,
     Request,
-    RequestStatus,
-    ContributionDetails,
     RequestStats, DEFAULT_REQUEST_ITEMS
 } from "./@core/firestore-interfaces/request";
 import {User, UserRoles} from "./@core/firestore-interfaces/user";
 import {
-    sendNewContributionEmail,
     sendPasswordlessSignInEmail,
     sendRegistrationSuccessEmail,
     sendRejectedByAdminEmail,
@@ -26,6 +23,8 @@ import {
 
 import FieldValue = admin.firestore.FieldValue;
 import {MessageDocument} from "./@core/firestore-interfaces/messages";
+import {requestStatusWatcher} from "./requestStatusWatcher";
+import {contributionWatcher} from "./contributionWatcher";
 
 admin.initializeApp();
 
@@ -205,171 +204,11 @@ exports.deleteUser = functions.region(regionName).https.onCall((data, context) =
 
 exports.requestStatusWatcher = functions.region(regionName).firestore
     .document(`${REQUESTS}/{requestId}`)
-    .onWrite((change, context) => {
-        const requestId = context.params.requestId;
-
-        const firestore = admin.firestore();
-        const batch = firestore.batch();
-
-        const statsRef = firestore.collection(REQUESTS).doc(__STATS__);
-        const requestRef = firestore.collection(REQUESTS).doc(requestId);
-        let userRef: FirebaseFirestore.DocumentReference<any>;
-
-        const dataBefore = change.before.data() as Request;
-        const dataAfter = change.after.data() as Request;
-
-        let activeRequest = 0;
-        let completeRequest = 0;
-        let requestStatus = null;
-
-        if (!dataAfter) {
-            // deleted
-            if (dataBefore.status === <RequestStatus>'active') {
-                activeRequest = -1;
-            } else if (dataBefore.status === <RequestStatus>'complete') {
-                completeRequest = -1;
-            }
-
-            // remove active items from user
-            userRef = firestore.collection(USERS).doc(dataBefore.user);
-            const activeItemsBefore = dataBefore.active as string[];
-            if (activeItemsBefore) {
-                activeItemsBefore.forEach(item => {
-                    batch.update(userRef, {
-                        ['_recentNeededItems.' + item]: FieldValue.increment(-1)
-                    });
-                });
-            }
-        } else {
-            if (dataBefore) {
-                // updated
-                const activeListAfter = dataAfter.active;
-                const completeListAfter = dataAfter.complete;
-                const activeListBefore = dataBefore.active;
-                const completeListBefore = dataBefore.complete;
-
-                // check if list is changed
-                if (completeListAfter && activeListAfter) {
-                    const activeListChanged = activeListBefore !== activeListAfter;
-                    const completeListChanged = completeListBefore !== completeListAfter;
-                    if (activeListChanged || completeListChanged) {
-                        if (activeListAfter.length === 0 && completeListAfter.length > 0) {
-                            if (dataAfter.status !== <RequestStatus>'complete') {
-                                requestStatus = <RequestStatus>'complete';
-                                completeRequest = 1;
-                                activeRequest = -1;
-                            }
-                        } else {
-                            if (dataAfter.status !== <RequestStatus>'active') {
-                                requestStatus = <RequestStatus>'active';
-                                completeRequest = -1;
-                                activeRequest = 1;
-                            }
-                        }
-                    }
-                }
-            } else {
-                // created
-                const activeList = dataAfter.active;
-                const completeList = dataAfter.complete;
-
-                if (activeList && completeList) {
-                    // change status
-                    if (activeList.length === 0 && completeList.length > 0) {
-                        requestStatus = <RequestStatus>'complete';
-                    } else {
-                        requestStatus = <RequestStatus>'active';
-                    }
-                }
-
-                if (dataAfter.status === <RequestStatus>'active') {
-                    console.info('is active');
-                    activeRequest = 1;
-                } else if (dataAfter.status === <RequestStatus>'complete') {
-                    console.info('is complete');
-                    completeRequest = 1;
-                }
-            }
-        }
-
-        batch.update(statsRef, {
-            active: FieldValue.increment(activeRequest),
-            complete: FieldValue.increment(completeRequest),
-        });
-
-        if (requestStatus) {
-            batch.update(requestRef, {status: requestStatus});
-        }
-
-        return batch.commit();
-    });
+    .onWrite(requestStatusWatcher);
 
 exports.contributionWatcher = functions.region(regionName).firestore
     .document(`${CONTRIBS}/{contribId}`)
-    .onWrite((change, context) => {
-        const firestore = admin.firestore();
-
-        const contribId = context.params.contribId;
-        const contribRef = firestore.collection(CONTRIBS).doc(contribId);
-
-        const dataBefore = change.before.data() as ContributionDetails;
-        const dataAfter = change.after.data() as ContributionDetails;
-
-        const batchRequest = firestore.batch();
-
-        return new Promise(async (resolve, reject) => {
-            try {
-                if (!dataBefore) {
-                    if (dataAfter && dataAfter.requestId) {
-                        const requestDoc = await firestore.collection(REQUESTS)
-                            .doc(dataAfter.requestId).get();
-                        const requestData = requestDoc.data() as Request;
-                        await contribRef.update({
-                            receiverId: requestData.user
-                        });
-
-                        const items = dataAfter.contributionItems;
-                        const contributorName = dataAfter.sender.name;
-                        const remarks = dataAfter.remarks;
-
-                        return sendNewContributionEmail(
-                            requestData.userInfo?.email || '',
-                            contributorName,
-                            items,
-                            remarks
-                        );
-                    }
-                } else {
-                    if (dataAfter) {
-                        const statusAfter = dataAfter.status;
-                        const requestId = dataAfter.requestId;
-
-                        if (requestId) {
-                            const requestRef = firestore.collection(REQUESTS)
-                                .doc(requestId).collection(REQUESTS__ITEMS);
-
-                            if (statusAfter === 'received') {
-                                const itemsReceived = dataAfter.contributionItemsReceived;
-                                if (itemsReceived) {
-                                    itemsReceived.forEach(item => {
-                                        batchRequest.update(requestRef.doc(item.name), {qtyFilled: item.qty});
-                                    });
-                                }
-                            }
-                        }
-                    }
-                }
-
-                await Promise.all([
-                    batchRequest.commit()
-                ]);
-
-                resolve();
-            } catch (e) {
-                reject(e);
-            }
-        });
-    });
+    .onWrite(contributionWatcher);
 
 /**
  * update __STATS__ in REQUESTS
@@ -434,25 +273,30 @@ exports.demandsWatcher = functions.region(regionName).firestore
 
         // check if parent is deleted
         const requestDoc = await requestRef.get();
-        if (requestDoc.exists) {
-            const requestData = requestDoc.data() as Request;
-            const userId = requestData.user;
+        let requestData: Request | null = null;
+        let userId = null;
+        const requestDocExists = requestDoc.exists;
+        if (requestDocExists) {
+            requestData = requestDoc.data() as Request;
+            userId = requestData.user;
             userRef = firestore.collection(USERS).doc(userId);
         }
 
         const dataBefore = change.before.data() as RequestItem;
         const dataAfter = change.after.data() as RequestItem;
 
-        let needIncrement: admin.firestore.FieldValue;
-        let fillIncrement: admin.firestore.FieldValue;
+        let needIncrement: admin.firestore.FieldValue | null = null;
+        let fillIncrement: admin.firestore.FieldValue | null = null;
         let itemNeed = FieldValue.arrayRemove(itemName);
         let itemComplete = FieldValue.arrayRemove(itemName);
         let recentItemNeedIncrement = 0;
 
         if (!dataAfter) {
             // item deleted
-            needIncrement = admin.firestore.FieldValue.increment(-dataBefore.qtyNeed);
-            fillIncrement = admin.firestore.FieldValue.increment(-dataBefore.qtyFilled);
+            if (requestData && requestData.status !== 'complete') {
+                needIncrement = admin.firestore.FieldValue.increment(-dataBefore.qtyNeed);
+                fillIncrement = admin.firestore.FieldValue.increment(-dataBefore.qtyFilled);
+            }
             recentItemNeedIncrement = -1;
         } else {
             if (dataBefore) {
@@ -488,10 +332,12 @@ exports.demandsWatcher = functions.region(regionName).firestore
         }
 
         batchStats.set(itemRef, {name: itemName}, {merge: true});
-        batchStats.update(itemRef, {
-            qtyNeed: needIncrement,
-            qtyFilled: fillIncrement
-        });
+        if (needIncrement && fillIncrement) {
+            batchStats.update(itemRef, {
+                qtyNeed: needIncrement,
+                qtyFilled: fillIncrement
+            });
+        }
 
         if (userRef) {
             batchRequest.update(requestRef, {

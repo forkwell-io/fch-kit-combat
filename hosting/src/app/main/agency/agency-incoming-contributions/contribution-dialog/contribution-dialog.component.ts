@@ -66,30 +66,29 @@ export class ContributionDialogComponent implements OnInit {
           });
           if (itemContributed) {
             qtyContributed = itemContributed.qty;
-          }
 
-
-          let qtyReceived = 0;
-          if (itemsReceived) {
-            const itemReceived = itemsReceived.find(itemReceived => {
-              return itemReceived.name === item.name;
-            });
-            if (itemReceived) {
-              qtyReceived = itemReceived.qty;
+            let qtyReceived = 0;
+            if (itemsReceived) {
+              const itemReceived = itemsReceived.find(itemReceived => {
+                return itemReceived.name === item.name;
+              });
+              if (itemReceived) {
+                qtyReceived = itemReceived.qty;
+              }
             }
-          }
 
-          const itemTransaction = {
-            name: item.name,
-            qtyNeed: item.qtyNeed,
-            qtyContributed,
-            qtyReceived: [qtyReceived, [Validators.min(0), Validators.max(qtyContributed)]]
-          };
-          const formGroup = this.fb.group(itemTransaction);
-          if (this.readOnly) {
-            formGroup.disable();
+            const itemTransaction = {
+              name: item.name,
+              qtyNeed: item.qtyNeed,
+              qtyContributed,
+              qtyReceived: [qtyReceived, [Validators.min(0), Validators.max(qtyContributed)]]
+            };
+            const formGroup = this.fb.group(itemTransaction);
+            if (this.readOnly) {
+              formGroup.disable();
+            }
+            this.items.push(formGroup);
           }
-          this.items.push(formGroup);
         });
 
         this.request = value;
@@ -144,6 +143,9 @@ export class ContributionDialogComponent implements OnInit {
             alert('Item in transport');
             this.loading = false;
           });
+      } else {
+        alert('Please select either you want to Transport or Receive the item');
+        this.loading = false;
       }
     }
   }

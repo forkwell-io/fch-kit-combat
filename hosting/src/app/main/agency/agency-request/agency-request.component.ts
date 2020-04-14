@@ -96,6 +96,15 @@ export class AgencyRequestComponent implements OnInit {
     this.load();
   }
 
+  public markAsComplete() {
+    this.isUpdating = true;
+    return this.requestService
+      .markRequestAsComplete(this.currentId)
+      .finally(() => {
+        this.reloadData();
+      });
+  }
+
   public summarizeRequiredItems(request: ContributionDetails): string {
     const maxCount = 2;
     const upperMaxCount = 3;
@@ -162,6 +171,7 @@ export class AgencyRequestComponent implements OnInit {
     this.loadContributions();
     this.reqService.getRequest(this.currentId)
       .then(request => {
+        console.log('Status:', request.status);
         this.currentReq = request;
         this.requestedItems = request.requestItems.sort((first, second) => {
           return (second.qtyNeed - second.qtyFilled) - (first.qtyNeed - first.qtyFilled);

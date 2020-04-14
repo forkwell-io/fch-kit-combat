@@ -83,15 +83,19 @@ export class StatsService {
   get requestItemsSnapshot(): Observable<RequestItem[]> {
     return new Observable(subscriber => {
       this.firebaseService.firestore().collection(REQUESTS).doc(__STATS__)
-        .collection(__STATS__ITEMS).onSnapshot(snapshot => {
-        const requestItems: RequestItem[] = [];
+        .collection(__STATS__ITEMS)
+        .onSnapshot(snapshot => {
+          const requestItems: RequestItem[] = [];
 
-        snapshot.docs.forEach(doc => {
-          requestItems.push(doc.data() as RequestItem);
+          snapshot.docs.forEach(doc => {
+            const item = doc.data() as RequestItem;
+            if (!((item.qtyFilled >= item.qtyNeed))) {
+              requestItems.push(item);
+            }
+          });
+
+          subscriber.next(requestItems);
         });
-
-        subscriber.next(requestItems);
-      });
     });
   }
 

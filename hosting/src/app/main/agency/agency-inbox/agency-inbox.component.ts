@@ -17,12 +17,20 @@ export class AgencyInboxComponent implements OnInit {
     private messageService: MessageService,
     public dialog: MdcDialog
   ) {
-    messageService.getMessages()
-      .then(value => {
-        this.messages = value;
-      })
-      .catch(e => {
-        console.error(e);
+    messageService.getMessagesSnapshot()
+      .then(obs => {
+        obs.subscribe(value => {
+          this.messages = value;
+          this.messages.sort((a, b) => {
+            if (a.dateCrt > b.dateCrt) {
+              return -1;
+            } else if (a.dateCrt < b.dateCrt) {
+              return 1;
+            } else {
+              return 0;
+            }
+          });
+        });
       });
   }
 

@@ -8,22 +8,34 @@
         <mdc-card class="row--item" style="flex: 1; height: 480px">
           <div style="display: flex; margin: 24px; justify-content: space-between">
             <span mdcHeadline6>Add new contribution request</span>
-            <button (click)="publish()" [disabled]="isPublishing || !isPublishAllowed" mdc-button unelevated>Publish
+            <button (click)="publish()"
+                    [disabled]="isPublishing || !isPublishAllowed"
+                    mdc-button unelevated>
+              Publish
             </button>
           </div>
           <mdc-list-divider></mdc-list-divider>
-          <div style="overflow-y: auto">
+
+          <div style="height: 100%; display: flex; align-items: center; justify-content: center; flex-direction: column;"
+               *ngIf="itemRequests.length === 0">
+            <img src="./assets/svg/wearing_a_mask_.svg" style="opacity: 0.78; max-height: 70%;">
+            <p mdcHelperText>Select items from the list on the right</p>
+          </div>
+
+          <div style="overflow-y: auto; position: relative;" *ngIf="itemRequests.length !== 0">
             <mdc-list [interactive]="false">
               <mdc-list-item *ngFor="let req of itemRequests" [disabled]="isPublishing">
                 <button (click)="remove(req)" mdc-icon-button>
                   <mdc-icon mdcListItemGraphic>cancel</mdc-icon>
                 </button>
                 <span style="flex: 1">{{req.name}}</span>
-                <mdc-text-field (change)="updateItem(req, +$event)" autocomplete="off" min="0" outlined step="1"
-                                style="width: 96px; height: 40px" type="number" value="0"></mdc-text-field>
+                <mdc-text-field (change)="updateItem(req, +$event)" autocomplete="off" min="1" outlined step="1"
+                                [disabled]="isPublishing" style="width: 96px; height: 40px" type="number"
+                                [value]="req.qtyNeed"></mdc-text-field>
               </mdc-list-item>
             </mdc-list>
           </div>
+
         </mdc-card>
         <div class="row--item" style="display: flex; flex-direction: column; margin-left: 8px">
           <mdc-card style="width: 320px; height: 480px">

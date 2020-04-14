@@ -1,12 +1,12 @@
 <main class="scrollable">
   <div>
-    <div [mdcElevation]="2" style="background-color: #009688; color: white; display: flex">
+    <div [mdcElevation]="2" style="background-color: #008e76; color: white; display: flex">
       <div class="content-frame-spacious" style="margin-top: 72px">
         <div class="content-area">
           <div style="display: flex; flex-direction: row">
             <div style="display: flex; flex-direction: column; flex: 1; padding: 32px; align-items: start">
               <div
-                style="display: flex; flex-direction: row; border-radius: 8px; background-color: #26a69a; padding: 16px">
+                style="display: flex; flex-direction: row; border-radius: 8px; background-color: rgba(255, 255, 255, 0.24); padding: 16px">
                 <div style="display: flex; flex-direction: column">
                   <span mdcHeadline5>{{joinedAgencies}}</span>
                   <span mdcCaption style="font-weight: bold">Agencies joined</span>
@@ -21,12 +21,12 @@
                 </div>
               </div>
               <span mdcHeadline4 style="margin-top: 24px">Contribute to help one another</span>
-              <span mdcCaption>COVID-19 &#8211; our common enemy</span>
+              <span mdcCaption>Combating COVID-19</span>
               <span mdcBody1 style="margin-top: 16px">
-                With the rising need of medical supplies amidst this COVID-19 pandemic, 
-                we understand the challenge in providing our front-liners the critical items they lack.
-                We want to enable them to publish their needs easily so we can work together to supply 
-                their needs as soon as possible.
+                With the rising shortage of medical supplies amidst this COVID-19 pandemic,
+                we understand the challenge in providing our medical staff and patients the critical items they lack.
+                Therefore, we want to enable medical agencies to publish their needs easily so we can work together to meet
+                their requests as soon as possible.
               </span>
               <div style="display: flex; flex-direction: row; margin-top: 24px">
                 <button class="intro" mdc-button outlined routerLink="/learn-more">GET STARTED</button>
@@ -85,7 +85,10 @@
             <div class="mdc-layout-grid__cell--span-12">
               <div class="mdc-layout-grid__inner">
                 <div *ngFor="let topRequest of topRequests" class="mdc-layout-grid__cell--span-6">
-                  <app-card-request-contrib [requestObject]="topRequest"></app-card-request-contrib>
+                  <app-card-request-contrib [currentUserId]="currentUserId"
+                                            (updated)="reloadData()"
+                                            [requestObject]="topRequest">
+                  </app-card-request-contrib>
                 </div>
                 <div *ngIf="!isLoading" class="mdc-layout-grid__cell--span-6">
                   <mdc-card class="see-more--card" outlined>

@@ -1,8 +1,14 @@
-
 <mdc-card *ngIf="agency">
   <div style="display: flex; flex-direction: row; margin: 24px; align-items: center">
     <mdc-card outlined style="width: 144px; height: 144px; border-radius: 72px">
-      <mdc-card-primary-action style="width: 100%; height: 100%"></mdc-card-primary-action>
+      <mdc-card-primary-action (click)="openProfilePhotoDialog()"
+                               style="display: flex; width: 100%; height: 100%; position: relative">
+        <img [src]="agency.imageUrl" alt="" style="width: 100%; height: 100%; object-fit: cover">
+        <div
+          style="display: flex; width: 100%; height: 36px; background: rgba(0, 0, 0, 0.54); position: absolute; bottom: 0; align-items: center; justify-content: center">
+          <mdc-icon style="color: white">camera_alt</mdc-icon>
+        </div>
+      </mdc-card-primary-action>
     </mdc-card>
     <div style="display: flex; flex-direction: column; margin-left: 24px">
       <span mdcHeadline4>{{agency.name}}</span>
@@ -12,9 +18,11 @@
         <mdc-icon style="margin-left: 16px">phone</mdc-icon>
         <span mdcBody2 style="margin-left: 8px">{{agency.phone}}</span>
       </div>
-      <div>
-        <button mdc-button outlined routerLink="/agency/details/edit"
-                style="margin-top: 16px">Edit details
+      <div style="display: flex; flex-direction: row; margin-top: 16px">
+        <button mdc-button outlined routerLink="/agency/details/edit">Edit details
+        </button>
+        <button (click)="openProfilePhotoDialog()" mdc-button
+                style="margin-left: 8px">Update profile photo
         </button>
       </div>
     </div>

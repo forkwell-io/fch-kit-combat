@@ -4,8 +4,9 @@ import {UserService} from '../../../@backend/user.service';
 import {RequestItem} from '../../../../@core/firestore-interfaces/request';
 import {UserRequestService} from '../../../@backend/user-request.service';
 import {RequestContribution} from '../../../../@core/requestContribution';
-import {MdcSnackbar} from '@angular-mdc/web';
+import {MdcDialog, MdcSnackbar} from '@angular-mdc/web';
 import {Router} from '@angular/router';
+import {ConfirmationDialogComponent, ConfirmationOptions} from '../../../dialogs/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-agency-request-contribution',
@@ -32,7 +33,8 @@ export class AgencyRequestContributionComponent implements OnInit {
   constructor(private router: Router,
               private userService: UserService,
               private requestService: UserRequestService,
-              private snackbar: MdcSnackbar) {
+              private snackbar: MdcSnackbar,
+              private dialog: MdcDialog) {
     userService.currentUserInfo()
       .then(agency => {
         this.agency = agency;
@@ -65,8 +67,9 @@ export class AgencyRequestContributionComponent implements OnInit {
       this.availableItems.splice(this.availableItems.indexOf(item), 1);
     }
     this.addedItems.push(item);
-    this.itemRequests.push({name: item, qtyFilled: 0, qtyNeed: 0});
+    this.itemRequests.push({name: item, qtyFilled: 0, qtyNeed: 1});
     this.availableItems = this.availableItems.sort();
+    this.resolvePublishIsAllowed();
   }
 
   public remove(request: RequestItem) {
@@ -109,24 +112,32 @@ export class AgencyRequestContributionComponent implements OnInit {
   }
 
   public publish() {
-    if (this.isPublishing) {
-      return;
-    }
-    this.isPublishing = true;
-    this.itemRequests.forEach((req) => {
-      this.newRequest.need(req.name, req.qtyNeed);
-    });
-    return this.requestService.createRequest(this.newRequest)
-      .then(_ => {
-        this.snackbar.open('Request published');
-        return this.router.navigate(['/agency']);
+    this.dialog
+      .open(ConfirmationDialogComponent, {
+        data: {title: 'Publish?', actionNegative: 'Cancel', actionPositive: 'Publish'} as ConfirmationOptions,
+        autoFocus: false
       })
-      .catch(reason => {
-        console.error(reason);
-        return this.snackbar.open('Unknown error occurred');
-      })
-      .finally(() => {
-        this.isPublishing = false;
+      .afterClosed()
+      .subscribe(value => {
+        if (this.isPublishing || value !== 'positive') {
+          return;
+        }
+        this.isPublishing = true;
+        this.itemRequests.forEach((req) => {
+          this.newRequest.need(req.name, req.qtyNeed);
+        });
+        return this.requestService.createRequest(this.newRequest)
+          .then(_ => {
+            this.snackbar.open('Request published');
+            return this.router.navigate(['/agency']);
+          })
+          .catch(reason => {
+            console.error(reason);
+            return this.snackbar.open('Unknown error occurred');
+          })
+          .finally(() => {
+            this.isPublishing = false;
+          });
       });
   }
 }

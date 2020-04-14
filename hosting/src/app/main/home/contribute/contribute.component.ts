@@ -5,6 +5,8 @@ import {ContributionItem, RequestObject} from '../../../../@core/firestore-inter
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ContribsService} from '../../../@backend/contribs.service';
 import {UserService} from '../../../@backend/user.service';
+import {MdcDialog} from '@angular-mdc/web';
+import {ConfirmationDialogComponent, ConfirmationOptions} from '../../../dialogs/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-contribute',
@@ -29,7 +31,8 @@ export class ContributeComponent implements OnInit {
               private route: ActivatedRoute,
               private reqService: RequestService,
               private userService: UserService,
-              private contrib: ContribsService) {
+              private contrib: ContribsService,
+              private dialog: MdcDialog) {
     route.queryParamMap.subscribe(params => {
       this.currentId = params.get('reqId');
       this.load();
@@ -66,38 +69,46 @@ export class ContributeComponent implements OnInit {
   }
 
   public publish() {
-    if (this.isPublishing) {
-      return;
-    }
-    this.isPublishing = true;
-    const nameControl = this.formGroup.controls.name;
-    const emailControl = this.formGroup.controls.email;
-    const phoneControl = this.formGroup.controls.phone;
-    const noteControl = this.formGroup.controls.note;
-    const name: string = nameControl.value;
-    const email: string = emailControl.value;
-    const phone: string = phoneControl.value;
-    const note: string = noteControl.value;
-
-    nameControl.disable();
-    emailControl.disable();
-    phoneControl.disable();
-    noteControl.disable();
-
-    return this.contrib.contributeToRequest(this.currentId, {
-      sender: {name, phone, email},
-      contributionItems: this.items,
-      remarks: note,
-    })
-      .then(_ => {
-        return this.router.navigate(['/']);
+    this.dialog
+      .open(ConfirmationDialogComponent, {
+        data: {title: 'Publish?', actionNegative: 'Cancel', actionPositive: 'Publish'} as ConfirmationOptions,
+        autoFocus: false
       })
-      .finally(() => {
-        nameControl.enable();
-        emailControl.enable();
-        phoneControl.enable();
-        noteControl.enable();
-        this.isPublishing = false;
+      .afterClosed()
+      .subscribe(value => {
+        if (this.isPublishing || value !== 'positive') {
+          return;
+        }
+        this.isPublishing = true;
+        const nameControl = this.formGroup.controls.name;
+        const emailControl = this.formGroup.controls.email;
+        const phoneControl = this.formGroup.controls.phone;
+        const noteControl = this.formGroup.controls.note;
+        const name: string = nameControl.value;
+        const email: string = emailControl.value;
+        const phone: string = phoneControl.value;
+        const note: string = noteControl.value;
+
+        nameControl.disable();
+        emailControl.disable();
+        phoneControl.disable();
+        noteControl.disable();
+
+        return this.contrib.contributeToRequest(this.currentId, {
+          sender: {name, phone, email},
+          contributionItems: this.items,
+          remarks: note,
+        })
+          .then(_ => {
+            return this.router.navigate(['/']);
+          })
+          .finally(() => {
+            nameControl.enable();
+            emailControl.enable();
+            phoneControl.enable();
+            noteControl.enable();
+            this.isPublishing = false;
+          });
       });
   }
 

@@ -7,7 +7,8 @@
             <div style="display: flex; flex-direction: row; margin: 24px; justify-content: flex-end">
               <div style="display: flex; align-items: flex-start; flex-direction: column; margin-right: 24px">
                 <span mdcHeadline5>Request progress</span>
-                <span mdcCaption>Completion: {{sum > 0 ? (progress + '%') : 'Unavailable'}}</span>
+                <span *ngIf="currentReq" mdcCaption>
+                  {{currentReq.status === 'complete' ? 'Marked as complete' : (sum > 0 ? 'Completion: ' + (progress + '%') : 'Unavailable')}}</span>
               </div>
               <button (click)="reloadData()" [disabled]="isLoadingRequestItems || isDeleting" mdc-icon-button
                       style="margin-left: auto">
@@ -21,7 +22,8 @@
                 </button>
                 <mdc-menu #options [anchorElement]="optionsAnchor" anchorCorner="bottomStart">
                   <mdc-list style="width: 280px">
-                    <mdc-list-item [disabled]="isDeleting">
+                    <mdc-list-item (click)="markAsComplete()" *ngIf="currentReq && currentReq.status !== 'complete'"
+                                   [disabled]="isDeleting">
                       <mdc-icon mdcListItemGraphic>done_all</mdc-icon>
                       Mark as complete
                     </mdc-list-item>

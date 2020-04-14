@@ -30,7 +30,8 @@
             <span mdcCaption>{{progressBarValue >= 1 ? 'Completed' : (itemProgress) + '% complete'}}</span>
             <mdc-linear-progress determinate [progress]="progressBarValue" [buffer]=1></mdc-linear-progress>
           </div>
-          <div *ngIf="!mini && requestObject.status !== 'complete'" style="display: flex; flex-direction: row">
+          <div *ngIf="!mini && requestObject.status !== 'complete' && currentUserId !== requestObject.userInfo.userId"
+               style="display: flex; flex-direction: row">
             <button [disabled]="!requestObject.user" [queryParams]="{reqId: requestObject.id}" mdc-button
                     mdcCardAction="button"
                     outlined
@@ -47,7 +48,23 @@
               Leave a message
             </button>
           </div>
-
+          <div *ngIf="!mini && currentUserId === requestObject.userInfo.userId"
+               style="display: flex; flex-direction: row">
+            <button [disabled]="!requestObject.user" [queryParams]="{reqId: requestObject.id}" mdc-button
+                    mdcCardAction="button"
+                    outlined
+                    routerLink="/agency/requests"
+                    style="flex: 1">
+              <mdc-icon>visibility_on</mdc-icon>
+              View
+            </button>
+            <button (click)="markAsCompleted(requestObject.id)" mdc-button
+                    mdcCardAction="button"
+                    outlined style="flex: 1">
+              <mdc-icon>done_all</mdc-icon>
+              Mark as completed
+            </button>
+          </div>
         </ng-container>
         <ng-template #emptyItem>
           <app-request-item [requestItem]="emptyRequestItem"></app-request-item>
@@ -62,7 +79,8 @@
     </div>
     <mdc-linear-progress style="margin-top: auto;"></mdc-linear-progress>
   </ng-template>
-  <div *ngIf="requestObject.status === 'complete'" style="position: absolute; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+  <div *ngIf="requestObject.status === 'complete'"
+       style="position: absolute; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
     <img src="./assets/completed-stamp-3.png" style="height: 80%;">
   </div>
 </mdc-card>

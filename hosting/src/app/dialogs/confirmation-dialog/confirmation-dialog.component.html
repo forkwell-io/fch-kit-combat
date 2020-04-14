@@ -1,0 +1,12 @@
+<mdc-dialog>
+  <mdc-dialog-container>
+    <mdc-dialog-surface>
+      <mdc-dialog-title *ngIf="title">{{title}}</mdc-dialog-title>
+      <mdc-dialog-content *ngIf="caption">{{caption}}</mdc-dialog-content>
+      <mdc-dialog-actions>
+        <button *ngIf="actionNegative" mdcDialogAction="negative" mdcDialogButton>{{actionNegative}}</button>
+        <button *ngIf="actionPositive" mdcDialogAction="positive" mdcDialogButton>{{actionPositive}}</button>
+      </mdc-dialog-actions>
+    </mdc-dialog-surface>
+  </mdc-dialog-container>
+</mdc-dialog>

@@ -5,6 +5,7 @@ const defaultMailOptions: Mail.Options = {
     from: '"Sharing is Caring" <noreply@firebase.com>'
 };
 
+// TODO: fill in your user & pass
 function createTransport(): Mail {
     return nodemailer.createTransport({
         service: 'gmail',

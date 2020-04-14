@@ -20,6 +20,25 @@ export class MessageService {
   ) {
   }
 
+  async getMessagesSnapshot(): Promise<Observable<MessageDocument[]>> {
+    const user = await this.userService.currentUser();
+    const userId = user.uid;
+    return new Observable(subscriber => {
+      this.firebaseService.firestore()
+        .collection(MESSAGES)
+        .where('receiverId', '==', userId)
+        .onSnapshot(snaps => {
+          const messages: MessageDocument[] = [];
+          snaps.docs.forEach(doc => {
+            const messageData = doc.data() as MessageDocument;
+            messageData.id = doc.id;
+            messages.push(messageData);
+          });
+          subscriber.next(messages);
+        });
+    });
+  }
+
   getMessages(): Promise<MessageDocument[]> {
     return new Promise(async (resolve, reject) => {
       const user = await this.userService.currentUser();

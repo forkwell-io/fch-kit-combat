@@ -70,7 +70,7 @@ export class RequestService {
     // TODO: pagination
     return new Promise((resolve, reject) => {
       this.firebaseService.firestore().collection(REQUESTS)
-        .orderBy('dateCrt', 'asc')
+        .orderBy('dateCrt', 'desc')
         .get()
         .then((querySnapshot) => {
           this._queryToRequestObject(querySnapshot)

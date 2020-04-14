@@ -7,6 +7,7 @@ import {MainModule} from './main/main.module';
 import {AppRoutingModule} from './app-routing.module';
 import {AuthModule} from './auth/auth.module';
 import {GoogleChartsModule} from 'angular-google-charts';
+import {DialogsModule} from './dialogs/dialogs.module';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import {GoogleChartsModule} from 'angular-google-charts';
     AppRoutingModule,
     MainModule,
     AuthModule,
+    DialogsModule,
     GoogleChartsModule.forRoot()
   ],
   providers: [],

@@ -34,7 +34,9 @@ import {MessageDialogComponent} from './agency/agency-inbox/message-dialog/messa
 import {ContributionDialogComponent} from './agency/agency-incoming-contributions/contribution-dialog/contribution-dialog.component';
 import {AgencyTransportingContributionsComponent} from './agency/agency-transporting-contributions/agency-transporting-contributions.component';
 import {AgencyCompletedContributionsComponent} from './agency/agency-completed-contributions/agency-completed-contributions.component';
-import { AgencyContributionsComponent } from './agency/agency-contributions/agency-contributions.component';
+import {AgencyContributionsComponent} from './agency/agency-contributions/agency-contributions.component';
+import {AgencyProfilePhotoDialogComponent} from './agency/agency-profile-photo-dialog/agency-profile-photo-dialog.component';
+import {DragDropDirective} from './drag-drop.directive';
 
 
 @NgModule({
@@ -68,6 +70,8 @@ import { AgencyContributionsComponent } from './agency/agency-contributions/agen
     AgencyTransportingContributionsComponent,
     AgencyCompletedContributionsComponent,
     AgencyContributionsComponent,
+    AgencyProfilePhotoDialogComponent,
+    DragDropDirective,
   ],
   imports: [
     CommonModule,
