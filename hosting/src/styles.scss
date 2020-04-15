@@ -1,0 +1,175 @@
+$primary: #009688;
+$secondary: #00796b;
+$background: #fafafa;
+
+@use '@material/theme' with (
+  $primary: $primary,
+  $secondary: $secondary,
+  $background: $background,
+);
+
+@use '@material/shape' with (
+  $small-component-radius: 6px,
+  $medium-component-radius: 8px,
+  $large-component-radius: 0px
+);
+
+@use '@material/typography' with (
+  $font-family: Nunito,
+  $styles-subtitle2: (
+    font-family: Nunito,
+    font-weight: 700,
+  ),
+  $styles-button: (
+    font-weight: 700,
+    text-transform: initial,
+  )
+);
+
+@use '@material/button';
+@use '@material/button/mdc-button';
+@use '@material/card/mdc-card';
+@use '@material/dialog/mdc-dialog';
+@use '@material/data-table/mdc-data-table';
+@use '@material/drawer/mdc-drawer';
+@use '@material/elevation/mdc-elevation';
+@use '@material/icon-button/mdc-icon-button';
+@use '@material/linear-progress/mdc-linear-progress';
+@use '@material/list/mdc-list';
+@use '@material/menu/mdc-menu';
+@use '@material/menu-surface/mdc-menu-surface';
+@use '@material/snackbar/mdc-snackbar';
+@use '@material/textfield/mdc-text-field';
+@use '@material/top-app-bar/mdc-top-app-bar';
+@use '@material/typography/mdc-typography';
+@use '@material/fab/mdc-fab';
+@use '@material/fab';
+@use '@material/radio/mdc-radio';
+@use '@material/slider/mdc-slider';
+@use '@material/form-field/mdc-form-field';
+@use '@material/chips/mdc-chips';
+
+@use '@material/layout-grid/mdc-layout-grid';
+
+@use '@angular-mdc/theme/material';
+
+html, body {
+  height: 100vh;
+  margin: 0;
+  background-color: #fafafa;
+}
+
+mdc-form-field mdc-text-field {
+  width: 100%;
+}
+
+mdc-form-field mdc-helper-text {
+  width: 100%;
+}
+
+mdc-text-field button.mdc-icon-button.mdc-text-field__icon.mdc-text-field__icon--leading {
+  left: 4px;
+}
+
+mdc-text-field button.mdc-icon-button.mdc-text-field__icon.mdc-text-field__icon--trailing {
+  right: 4px;
+}
+
+mdc-form-field mdc-text-field {
+  margin-top: 16px;
+}
+
+mdc-form-field:first-child mdc-text-field {
+  margin-top: 0;
+}
+
+.mdc-button {
+  overflow: hidden;
+}
+
+mdc-card ::-webkit-scrollbar-thumb {
+  background: #cfd8dc;
+}
+
+mdc-card ::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+mdc-card ::-webkit-scrollbar {
+  width: 6px;
+  border-radius: 2px;
+}
+
+main .content-frame {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+main .content-frame-spacious {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+main .content-frame-medium {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+main .content-frame .content-area {
+  display: flex;
+  margin: 16px;
+  flex-direction: column;
+}
+
+main .content-frame-medium .content-area {
+  display: flex;
+  margin: 16px;
+  flex-direction: column;
+}
+
+main .content-frame-spacious .content-area {
+  display: flex;
+  margin: 16px;
+  flex-direction: column;
+}
+
+main.scrollable {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+mdc-data-table.no-border {
+  border-width: 0;
+}
+
+.custom-chip {
+  background-color: $primary;
+  text-align: center;
+  border-radius: 5px;
+  color: white;
+  padding: 4px 8px;
+  margin-left: 3px;
+  font-weight: bold;
+  font-size: 11px;
+}
+
+.custom-chip-noti {
+  background-color: $secondary;
+  text-align: center;
+  border-radius: 9px;
+  color: white;
+  padding: 4px 8px;
+  margin-left: 3px;
+  font-weight: bold;
+  font-size: 11px;
+}
+
+.active-button .mdc-button__ripple::before {
+    opacity: 0.12;
+}

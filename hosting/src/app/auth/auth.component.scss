@@ -1,0 +1,59 @@
+@use '@material/card';
+
+.container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  margin: auto;
+  flex-direction: column;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+}
+
+//noinspection SassScssUnresolvedMixin
+main .content {
+  @include card.outline(rgba(0, 0, 0, 0.12), 0);
+}
+
+main .content div {
+  margin: 80px 16px;
+}
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  flex-flow: wrap;
+  margin: auto 8px 24px;
+}
+
+footer .options-1 {
+  margin: 8px 0 0;
+}
+
+footer .options-2 {
+  margin: 8px 0 0;
+}
+
+//noinspection SassScssUnresolvedMixin
+@media only screen and (min-width: 600px) {
+  .container {
+    width: 640px;
+  }
+  .container::before, .container::after {
+    content: '';
+    flex-grow: 1;
+    min-height: 24px;
+  }
+  main .content {
+    @include card.outline(rgba(0, 0, 0, 0.12), 1px);
+  }
+  main .content div {
+    margin: 80px 48px;
+  }
+  footer {
+    margin: 16px 0 0;
+  }
+}

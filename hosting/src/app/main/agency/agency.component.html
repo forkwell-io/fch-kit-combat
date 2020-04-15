@@ -1,0 +1,58 @@
+<div style="display: flex; height: 100%; overflow: hidden">
+  <mdc-drawer>
+    <mdc-drawer-content>
+      <mdc-list>
+        <mdc-list-item [routerLinkActiveOptions]="{exact: true}" routerLink="/agency"
+                       routerLinkActive="mdc-list-item--activated">
+          <mdc-icon mdcListItemGraphic>view_quilt</mdc-icon>
+          <span>Overview</span>
+        </mdc-list-item>
+        <mdc-list-item [routerLinkActiveOptions]="{exact: true}" routerLink="/agency/inbox"
+                       routerLinkActive="mdc-list-item--activated">
+          <mdc-icon mdcListItemGraphic>inbox</mdc-icon>
+          <span>Inbox {{inboxUnreadCount > 0 ? '(' + inboxUnreadCount + ')' : ''}}</span>
+        </mdc-list-item>
+<!--        <mdc-list-item [routerLinkActiveOptions]="{exact: true}" routerLink="/agency/details"-->
+<!--                       routerLinkActive="mdc-list-item&#45;&#45;activated">-->
+<!--          <mdc-icon mdcListItemGraphic>info_outline</mdc-icon>-->
+<!--          <span>Agency details</span>-->
+<!--        </mdc-list-item>-->
+      </mdc-list>
+      <mdc-list-divider></mdc-list-divider>
+      <mdc-list-group-subheader>Requests</mdc-list-group-subheader>
+      <mdc-list>
+        <mdc-list-item [routerLinkActiveOptions]="{exact: true}" routerLink="/agency/requests"
+                       routerLinkActive="mdc-list-item--activated">
+          <mdc-icon mdcListItemGraphic>assignment</mdc-icon>
+          <span>All requests</span>
+        </mdc-list-item>
+      </mdc-list>
+      <mdc-list-group-subheader>Contributions</mdc-list-group-subheader>
+      <mdc-list>
+        <mdc-list-item [routerLinkActiveOptions]="{exact: true}" routerLink="/agency/in-contributions"
+                       routerLinkActive="mdc-list-item--activated">
+          <mdc-icon mdcListItemGraphic>assignment_returned</mdc-icon>
+          <span>Incoming {{incomingContributionCount > 0 ? '(' + incomingContributionCount + ')' : ''}}</span>
+        </mdc-list-item>
+        <mdc-list-item [routerLinkActiveOptions]="{exact: true}" routerLink="/agency/transporting-contributions"
+                       routerLinkActive="mdc-list-item--activated">
+          <mdc-icon mdcListItemGraphic>rv_hookup</mdc-icon>
+          <span>In Transport</span>
+        </mdc-list-item>
+        <mdc-list-item [routerLinkActiveOptions]="{exact: true}" routerLink="/agency/done-contributions"
+                       routerLinkActive="mdc-list-item--activated">
+          <mdc-icon mdcListItemGraphic>assignment_turned_in</mdc-icon>
+          <span>Received</span>
+        </mdc-list-item>
+        <mdc-list-item [routerLinkActiveOptions]="{exact: true}" routerLink="/agency/my-contributions"
+                       routerLinkActive="mdc-list-item--activated">
+          <mdc-icon mdcListItemGraphic>assignment</mdc-icon>
+          <span>My Contributions</span>
+        </mdc-list-item>
+      </mdc-list>
+    </mdc-drawer-content>
+  </mdc-drawer>
+  <div style="flex: 1; overflow: hidden">
+    <router-outlet></router-outlet>
+  </div>
+</div>

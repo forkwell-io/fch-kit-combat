@@ -1,0 +1,89 @@
+<mdc-card [outlined]="mini" style="overflow: hidden; min-height: 100px; position: relative;">
+  <ng-container *ngIf="requestObject.user; else skelly">
+    <div style="display: flex; flex-direction: row">
+      <div *ngIf="!mini" [mdcElevation]="1"
+           style="width: 144px; height: 144px; border-bottom-right-radius: 24px; overflow: hidden">
+        <img [src]="imgUrl" alt="" style="width: 100%; height: 100%; object-fit: fill">
+      </div>
+      <div style="flex: 1; padding: 24px">
+        <div style="display: flex; flex-direction: row; align-items: center; justify-content: space-between">
+          <h2 *ngIf="!mini" class="demo-card__title" mdcHeadline6>{{requestObject.userInfo.name}}</h2>
+          <span mdcCaption style="max-lines: 1">{{requestObject.dateCrt.toDate().toLocaleString()}}</span>
+        </div>
+        <ng-container *ngIf="requestObject.requestItems.length > 0; else emptyItem">
+          <app-request-item [requestItem]="requestObject.requestItems[0]"></app-request-item>
+          <ng-container *ngIf="viewAll;">
+            <app-request-item *ngFor="let item of requestObject.requestItems | slice:1; let i = index;"
+                              [requestItem]="item"></app-request-item>
+          </ng-container>
+
+          <div class="demo-card__left">
+            <button mdc-button (click)="toggleViewAll()">
+              <div>
+                <span *ngIf="requestObject.requestItems.length === 1">1 item</span>
+                <span *ngIf="requestObject.requestItems.length > 1">{{!viewAll ? 'View all' : 'View less'}}</span>
+              </div>
+            </button>
+          </div>
+
+          <div style="padding:0 0 1rem 0">
+            <span mdcCaption>{{progressBarValue >= 1 ? 'Completed' : (itemProgress) + '% complete'}}</span>
+            <mdc-linear-progress determinate [progress]="progressBarValue" [buffer]=1></mdc-linear-progress>
+          </div>
+          <div *ngIf="!mini && requestObject.status !== 'complete' && currentUserId !== requestObject.userInfo.userId"
+               style="display: flex; flex-direction: row">
+            <button [disabled]="!requestObject.user" [queryParams]="{reqId: requestObject.id}" mdc-button
+                    mdcCardAction="button"
+                    outlined
+                    routerLink="/contribute"
+                    style="flex: 1">
+              <mdc-icon>favorite</mdc-icon>
+              Contribute
+            </button>
+            <button (click)="leaveMessageDialog(requestObject)" [disabled]="!requestObject.user" mdc-button
+                    mdcCardAction="button"
+                    outlined
+                    style="flex: 1">
+              <mdc-icon>message</mdc-icon>
+              Leave a message
+            </button>
+          </div>
+          <div *ngIf="!mini && currentUserId === requestObject.userInfo.userId"
+               style="display: flex; flex-direction: row">
+            <button [disabled]="!requestObject.user" [queryParams]="{reqId: requestObject.id}" mdc-button
+                    mdcCardAction="button"
+                    outlined
+                    routerLink="/agency/requests"
+                    style="flex: 1">
+              <mdc-icon>visibility_on</mdc-icon>
+              View
+            </button>
+            <button (click)="markAsCompleted(requestObject.id)" mdc-button
+                    mdcCardAction="button"
+                    outlined style="flex: 1">
+              <mdc-icon>done_all</mdc-icon>
+              Mark as completed
+            </button>
+          </div>
+        </ng-container>
+        <ng-template #emptyItem>
+          <app-request-item [requestItem]="emptyRequestItem"></app-request-item>
+          <span>No item</span>
+        </ng-template>
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #skelly>
+    <div style="display: flex; align-items: center; justify-content: center; height: 100%;">
+      <p style="text-align: center;" mdcOverline>Loading</p>
+    </div>
+    <mdc-linear-progress style="margin-top: auto;"></mdc-linear-progress>
+  </ng-template>
+  <div *ngIf="requestObject.status === 'complete'"
+       style="position: absolute; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+    <img src="./assets/completed-stamp-3.png" style="height: 80%;">
+  </div>
+</mdc-card>
+
+
+

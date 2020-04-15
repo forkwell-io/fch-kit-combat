@@ -1,128 +1,84 @@
-# Forkwell Coronavirus Hack: Virus Combat
+# Team Holmes &#8211; Submission for Forkwell Coronavirus Hackathon
 
-[Fork](https://guides.github.com/activities/forking/) this repository to start participating!
+## Team Members
+Hi! We are a team of 5 members consisting of:
+* [Chang Yang Loong](https://github.com/changyangloong)
+* [Chan Teck Wei](https://github.com/chantw)
+* [Danish Ezwan](https://github.com/coffeestains1908)
+* [Teoh Shu Hong](https://github.com/Harlley7289)
+* [Sophia Anak Chulif @ Douglas Chulip](https://github.com/sophiadouglas)
 
-[![](https://img.shields.io/discord/692562848437764096.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://discord.gg/jFjbXqp)
+## Topic Chosen
+Topic 2 &#8211; Virus Combat
 
-## About
+Report: https://docs.google.com/document/d/1sj6chHCMd7qJ3oH_zs1uHkyNcLvqaCgExKsCRCVmemo/edit?usp=sharing
 
-Welcome to [Forkwell Coronavirus Hack](https://www.forkwell.io/events/forkwell-coronavirus-hack)!
+## Solution: Web-based Application
+A medical resource sharing platform: [Sharing is Caring](https://neuon-hackathon-holmes.web.app/)
 
-This repository contains the hackathon kit for you to get started on solving **Topic 2: Virus
-Combat** and (eventually) all of your submissions.
+### Motivation Behind the Solution
+In this period of movement control order (MCO), we have seen all frontline authoritative personnel requesting us to 
+stay at home while they try their best to keep us safe. We see the sacrifices of doctors and nurses putting their lives at risk 
+as proper masks, gowns, eye gear or personal protective equipments are running low. The shortage of these medical supplies
+are allowing our frontliners and patients to be more vulnerable to this virus and we do not want that to happen. Thus, the idea 
+of Sharing is Caring is formed. Sharing is Caring acts as a platform for medical agencies, government, social as well as non-governmental organisations (NGOs) to request and share medical resources within our communities. By reaching out to the public, the 
+collective contribution down to a single individual no matter how small, might greatly resolve the shortage of our medical agency's supplies. 
 
-## Sponsors
+### Problem Statement
+With the rising shortage of medical supplies amidst this COVID-19 pandemic, various efforts have been carried out 
+to coordinate the funding and collection of medical supplies. However, 
+* these efforts may be hard to follow as needs are rapidly changing,
+* the channels to address them are not enough,
+* our communities may have the resources to offer but do not know who needs them or which nearest institution they 
+can donate to. 
 
-| [![Microsoft](https://user-images.githubusercontent.com/19421765/77505763-ff940400-6e9e-11ea-8c47-cafdf6b3b2d6.png)](https://microsoft.com/)           | [![MDEC](https://uploads-ssl.webflow.com/5dedc0ed675ba87b09857f05/5e7b5a7ea804328ecaf8e5a2_mdec.png)](https://mdec.my/)                       | [![Runcloud](https://uploads-ssl.webflow.com/5dedc0ed675ba87b09857f05/5e79fb8c21fcad40f1a34b8a_runcloud.png)](https://runcloud.io/)                  |
-|--------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [![AWS](https://uploads-ssl.webflow.com/5dedc0ed675ba87b09857f05/5e7b5a7ef803a29eed975378_aws.png)](https://aws.amazon.com/)                           | [![DigitlOcean](https://uploads-ssl.webflow.com/5dedc0ed675ba87b09857f05/5e79fb8b1de27906a0d0c3dc_digital-ocean.png)](https://do.co/forkwell) | [![Sunway iLabs](https://uploads-ssl.webflow.com/5dedc0ed675ba87b09857f05/5e79fb8c1de2795359d0c3de_ilab.png)](https://innovationlabs.sunway.edu.my/) |
-| [![CoronaTracker](https://uploads-ssl.webflow.com/5dedc0ed675ba87b09857f05/5e7c7a1afb4b4a4e49fa0357_coronatracker.png)](https://www.coronatracker.com) | [![LEAD](https://uploads-ssl.webflow.com/5dedc0ed675ba87b09857f05/5e7c7a1af1e7b76379787b82_lead.png)](https://www.thelead.io/)                | [![AI Geeks](https://uploads-ssl.webflow.com/5dedc0ed675ba87b09857f05/5e798a3fccd66c285759a635_ai-geeks.png)](https://aigeeks.net/)                  |
+Do you know what items are lacking at your local general hospital? We believe we require a platform to make these 
+items publicly known. Our solution is a web-based application whereby medical agencies can make known their 
+medical supply needs and allow anyone to tap into it. A collective and centralised effort involving the public 
+is required to source these items to those in need as soon as possible.
 
-## Background
+### Target Users
+* Medical agencies (hospitals, clinics)
+* Suppliers / donors (industries, NGOs, individuals)
 
-WHO has outlined key actions for managing pandemics; testing, tracking, tracing, isolation and
-quarantine. Governments around the world are applying these key actions to cope with the spread of
-disease but appear to be inadequate with the scale of the outbreak. We as individuals can play a
-substantial role in combating this outbreak. With the help of modern technologies, we can realise
-these actions effectively.
+### Features
+* Request for medical supplies
+* Contribute medical supplies
+* Track progress of requested supplies
+* Provide exchange of contacts between different parties
 
-Developing a tool targeted for government, authorities, communities, and individuals are all
-acceptable. Teams with the winning prototype will automatically get **wildcard** placement in
-[Sunway iLab's Super Accelerator](https://innovationlabs.sunway.edu.my/accelerator/) program to
-realise the prototype at scale!
+## Repository Content
+This repo contains 2 source code:
+1. Firebase Functions -> `./functions`
+2. Angular Web App -> `./hosting`
 
-## Goal
+## Getting started
 
-Build web-based or mobile apps to help nations cope with the outbreak.
+#### Tools used
+* Firebase
+  * Firebase Hosting (deployment)
+  * Cloud Firestore (database)
+  * Cloud Functions (backend logics)
+* Node.js
+* AngularJS
+* express.js
 
-1. Identify worrying trends by applying AI and Big Data techniques to publicly available datasets.
-2. Propose and develop a prototype that helps nations alleviate these worrying trends.
-3. Showcase your proposal and prototype.
+#### Motivation
+* Rapid development
+* Free development quota 
+* Free web hosting
+* Enable building SPA
+* Loosely coupled component
+* Two way data binding
+* Reducing boilerplate code
+* Support Firebase libraries
 
-## Submission
+### Configuring Firebase Functions (inside `./functions`)
+To run the functions, a Firebase project is required as described in [here](https://firebase.google.com/docs/functions/get-started).
 
-You are required to submit a 15-minute presentation video of your report. However, to ensure the
-legitimacy of your submission, you are required to submit your project artifacts (code, datasets,
-documents) as a [fork](https://guides.github.com/activities/forking/) to this repository.
+### Building Angular project (inside `./hosting`)
+Change the content of class variable `firebaseConfig` to your own Firebase project web config (explained [here](https://support.google.com/firebase/answer/7015592?hl=en)). Assuming Node.js and [Angular CLI](https://angular.io/guide/setup-local) has been installed on a development PC, run `ng build --prod` to build the project as deployable web.
 
-A submission form will be available on the 14th of April 2020 for submission,
-please join our
-[facebook](https://facebook.com/groups/forkwellcoronavirushack/) group and
-[discord](https://discord.gg/jFjbXqp) channel to keep updated with latest changes.
-
-After creating your own [fork](https://guides.github.com/activities/forking/), clone your
-repository:
-
-```sh
-git clone git@github.com:<your-github-username>/fch-virus-combat
-```
-
-Change to the directory:
-
-```sh
-cd fch-virus-combat
-```
-
-Set upstream:
-
-```sh
-git remote add upstream git@github.com:forkwell-io/fch-virus-combat
-```
-
-...and start Hacking!!
-
-Once you are ready to submit, create a pull request from your
-[fork](https://guides.github.com/activities/forking/) to us and include the link to your fork in
-your submission form that will be available on the 14th of April 2020.
-
-Please remember that your code will be publicly available, open-sourced licesed and free for the
-internet to use. Please ensure that you don't commit any sensitive information!
-
-## Resources
-
-### Databases
-
-| Name                                             | Link                                                                                                          |
-|--------------------------------------------------|---------------------------------------------------------------------------------------------------------------|
-| New cases, New deaths, Total cases, Total deaths | https://covid.ourworldindata.org/data/full_data.csv                                                           |
-| Airport codes                                    | https://drive.google.com/file/d/1Wb1bYYfS46356uAeyw1qGse7SQjo5OEa/view?usp=sharing                            |
-| Flight data                                      | https://drive.google.com/file/d/1eSq2vDSQJzDeORZS_VcjzZ_PRcbhcbf7/view?usp=sharing                            |
-| World Health Organization                        | https://drive.google.com/open?id=1oe15S0i9fG4mYr8IxqWfASYbxsunWyRh                                            |
-| Johns Hopkins                                    | https://github.com/CSSEGISandData/COVID-19                                                                    |
-| Nextstrain                                       | https://github.com/nextstrain/ncov                                                                            |
-| Dataset Seach                                    | https://blog-google.cdn.ampproject.org/c/s/blog.google/products/search/discovering-millions-datasets-web/amp/ |
-
-### APIs
-
-| Name                 | Link                                                                                                    |
-|----------------------|---------------------------------------------------------------------------------------------------------|
-| CoronaTracker API    | https://api.coronatracker.com                                                                           |
-| COVID-19 Postman API | https://covid-19-apis.postman.com/                                                                      |
-| COVID-19 Rapid API   | https://rapidapi.com/api-sports/api/covid-193?endpoint=apiendpoint_dfb9e52d-bd90-48ec-a571-8b78610a736d |
-
-### Tools
-
-| Name                 | Link                                                |
-|----------------------|-----------------------------------------------------|
-| nodejs-starter       | https://github.com/MLH/mlh-hackathon-nodejs-starter |
-| rails-devise-graphql | https://github.com/zauberware/rails-devise-graphql  |
-| microAuth            | https://github.com/Gingernaut/microAuth             |
-
-## Awesome perks from our sponsors!
-
-Deployment
-- [DigitalOcean](https://do.co/forkwell)
-
-E-learning
-- [Microsoft Learn](https://aka.ms/learn)
-
-## Help us organize better
-
-Feel free to open issues if you find anything lacking and we appreciate your feedback greatly!
-
-## Community
-
-Join the community!
-- [Discord](https://discord.gg/jFjbXqp)
-- [Forkwell Facebook Group](https://facebook.com/groups/forkwellcoronavirushack/)
-
+## Supported by
+NEUON SDN. BHD.
+www.neuon.ai

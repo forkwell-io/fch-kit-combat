@@ -1,0 +1,57 @@
+<main class="scrollable">
+  <div *ngIf="isLoadingRequest"
+       style="height: 0">
+    <mdc-linear-progress></mdc-linear-progress>
+  </div>
+  <div class="content-frame-spacious">
+    <div class="content-area">
+      <div *ngIf="request"
+           style="display: flex; flex-direction: row">
+        <mdc-card style="flex: 1">
+          <div style="display: flex; margin: 24px; flex-direction: column">
+            <span mdcOverline>Receiver</span>
+            <span mdcHeadline6>{{request.userInfo.name}}</span>
+            <span mdcCaption style="margin-top: 16px">Address</span>
+            <pre mdcBody2 style="margin: 0">{{request.userInfo.address}}</pre>
+          </div>
+          <mdc-list-divider></mdc-list-divider>
+          <div style="display: flex; margin: 24px; flex-direction: column">
+            <span mdcOverline>Contributor</span>
+            <form (ngSubmit)="publish()"
+                  [formGroup]="formGroup" style="margin-top: 16px">
+              <mdc-form-field>
+                <mdc-text-field formControlName="name" label="Name (or contribution agency's name)"
+                                outlined></mdc-text-field>
+              </mdc-form-field>
+              <mdc-form-field>
+                <mdc-text-field formControlName="phone" label="Contact no." outlined></mdc-text-field>
+              </mdc-form-field>
+              <mdc-form-field>
+                <mdc-text-field formControlName="email" label="Email" outlined></mdc-text-field>
+              </mdc-form-field>
+              <mdc-form-field>
+                <mdc-text-field formControlName="note" label="Note" outlined></mdc-text-field>
+              </mdc-form-field>
+              <button [disabled]="!formGroup.valid || isPublishing" mdc-button outlined
+                      style="width: 100%; margin-top: 16px"
+                      type="submit">Submit contribution details
+              </button>
+            </form>
+          </div>
+        </mdc-card>
+        <mdc-card style="width: 480px; margin-left: 16px">
+          <mdc-list interactive="false" twoLine>
+            <mdc-list-item *ngFor="let item of request.requestItems">
+              <mdc-list-item-text
+                [secondaryText]="'Need ' + (item.qtyNeed - item.qtyFilled) + ' units more'">{{item.name}}</mdc-list-item-text>
+              <mdc-text-field (change)="updateItem(item.name, +$event)" [max]="item.qtyNeed - item.qtyFilled" min="0"
+                              outlined style="width: 96px; height: 40px; margin-left: auto"
+                              type="number"
+                              value="0"></mdc-text-field>
+            </mdc-list-item>
+          </mdc-list>
+        </mdc-card>
+      </div>
+    </div>
+  </div>
+</main>

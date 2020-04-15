@@ -1,0 +1,32 @@
+main {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+}
+
+.toolbar {
+  padding: 16px;
+}
+
+.toolbar button {
+  border-radius: 18px;
+}
+
+.content-area .item {
+  margin: 8px 16px 0;
+}
+
+.content-area .item:first-child {
+  margin: 16px 16px 0;
+}
+
+.content-area .item:last-child {
+  margin: 8px 16px 16px;
+}
+
+.agency-photo {
+  width: 64px;
+  height: 64px;
+  border-radius: 32px;
+  background-color: grey;
+}

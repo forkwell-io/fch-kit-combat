@@ -1,0 +1,108 @@
+<mdc-dialog>
+  <mdc-dialog-container>
+    <mdc-dialog-surface style="min-width: 640px; max-width: 720px;">
+
+      <mdc-dialog-title>Contribution</mdc-dialog-title>
+
+      <mdc-dialog-content *ngIf="showMainContent">
+        <p style="margin-bottom: 0;">From: <b>{{contributionDetails.sender.name}}</b>
+          <span mdcCaption>
+            <{{contributionDetails.sender.email}} / {{contributionDetails.sender.phone}}>
+          </span>
+        </p>
+        <p style="margin: 0;" mdcCaption>
+          {{contributionDetails.dateCrt.toDate()}}
+        </p>
+        <p>
+          Note:
+          <span mdcCaption>{{contributionDetails.remarks}}</span>
+        </p>
+        <p>
+          To:
+          <ng-container *ngIf="request; else requestEmpty">
+            <app-card-request-contrib [requestObject]="this.request" [mini]="true"></app-card-request-contrib>
+          </ng-container>
+          <ng-template #requestEmpty>
+            <mdc-card>
+              <span style="text-align: center; padding: 14px;" mdcCaption>The request does not exist anymore</span>
+            </mdc-card>
+          </ng-template>
+        </p>
+
+        <form
+          style="margin-top: 6px;"
+          [formGroup]="contributionForm" id="contributionForm" (ngSubmit)="submit()" autocomplete="off">
+
+          <mdc-radio-group *ngIf="!readOnly" formControlName="status">
+            <ng-container *ngFor="let status of contributionStatuses">
+              <mdc-form-field>
+                <mdc-radio [disabled]="status === 'waiting'" [value]="status"></mdc-radio>
+                <label style="text-transform: capitalize;">{{status}}</label>
+              </mdc-form-field>
+            </ng-container>
+          </mdc-radio-group>
+
+          <mdc-list disableRipple [interactive]="false">
+            <mdc-list-item>
+              <mdc-icon mdcListItemGraphic>compare_arrows</mdc-icon>
+              Items to {{readOnly ? 'transact' : 'receive'}}
+            </mdc-list-item>
+          </mdc-list>
+
+          <mdc-data-table>
+            <table mdcDataTableTable width="100%">
+              <thead>
+              <tr mdcDataTableHeaderRow>
+                <th mdcDataTableHeaderCell>Item</th>
+                <th style="text-align: center;" mdcDataTableHeaderCell>Contributed</th>
+                <th style="text-align: center;" mdcDataTableHeaderCell>Requested</th>
+                <th
+                  style="text-align: center;" mdcDataTableHeaderCell>
+                  {{readOnly ? 'Received' : 'To Take'}}
+                </th>
+              </tr>
+              </thead>
+              <tbody mdcDataTableContent>
+              <tr
+                formArrayName="items"
+                mdcDataTableRow
+                *ngFor="let item of items.controls; index as i;">
+
+                <td mdcDataTableCell>{{item.value.name}}</td>
+                <td align="center" mdcDataTableCell>{{item.value.qtyContributed}}</td>
+                <td align="center" mdcDataTableCell>{{item.value.qtyNeed}}</td>
+                <td *ngIf="readOnly" align="center" mdcDataTableCell>{{item.value.qtyReceived}}</td>
+                <td
+                  *ngIf="!readOnly"
+                  [formGroupName]="i" align="center" mdcDataTableCell>
+                  <mdc-text-field
+                    formControlName="qtyReceived"
+                    (change)="onQtyReceivedChange($event, item)"
+                    autocomplete="off" min="0" outlined step="1"
+                    [max]="item.value.qtyContributed"
+                    style="width: 96px; height: 40px" type="number"
+                    value="0"></mdc-text-field>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </mdc-data-table>
+
+        </form>
+      </mdc-dialog-content>
+
+      <mdc-dialog-content *ngIf="loading">
+        <mdc-linear-progress></mdc-linear-progress>
+      </mdc-dialog-content>
+
+      <mdc-dialog-actions *ngIf="!loading && !readOnly">
+        <button mdcDialogButton mdcDialogAction="close">Cancel</button>
+        <button raised mdcDialogButton form="contributionForm">Confirm</button>
+      </mdc-dialog-actions>
+      <mdc-dialog-actions *ngIf="!loading && readOnly">
+        <button mdcDialogButton mdcDialogAction="close">Close</button>
+      </mdc-dialog-actions>
+
+    </mdc-dialog-surface>
+  </mdc-dialog-container>
+</mdc-dialog>

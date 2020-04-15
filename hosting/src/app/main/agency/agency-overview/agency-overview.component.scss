@@ -1,0 +1,23 @@
+@use '@material/theme';
+
+@mixin rgba-background($hexcolor, $opacity) {
+  background-color: $hexcolor;
+  background-color: rgba($hexcolor, $opacity);
+}
+
+$request-help--color: #03a9f4;
+
+.request-help--card {
+  flex: 1;
+  //background: #81d4fa;
+  @include rgba-background($request-help--color, 0.5);
+}
+
+.request-help--text {
+  display: flex;
+  flex-direction: column;
+  padding: 16px 24px;
+  color: white;
+  //background: #03a9f4;
+  background: $request-help--color;
+}

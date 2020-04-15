@@ -1,0 +1,45 @@
+<main class="scrollable">
+  <div class="toolbar">
+    <button mdc-button outlined routerLink="/admin/create-agency">
+      <mdc-icon>add</mdc-icon>
+      Register new agency
+    </button>
+  </div>
+  <div style="height: 1px; background-color: rgba(0, 0, 0, 0.12)">
+    <mdc-linear-progress *ngIf="isLoading"></mdc-linear-progress>
+  </div>
+  <div class="content-frame">
+    <div class="content-area">
+      <mdc-card *ngFor="let agency of agencies" class="item">
+        <div style="display: flex; margin: 16px">
+          <div class="agency-photo"></div>
+          <div style="display: flex; flex-direction: column; margin: auto 16px auto">
+            <span mdcHeadline6>{{agency.name}}</span>
+            <span mdcBody2>{{agency.email}}</span>
+          </div>
+        </div>
+        <div style="display: flex; padding-left: 96px; flex-direction: column">
+          <span mdcCaption>Address</span>
+          <span>{{agency.address}}</span>
+        </div>
+        <div style="padding: 24px 16px 24px 96px">
+          <button *ngIf="!agency.verifiedByAdmin" [routerLink]="['/admin/agency-member-requests', agency.userId]"
+                  mdc-button
+                  style="margin-right: 8px" unelevated>
+            <mdc-icon>how_to_reg</mdc-icon>
+            Verify
+          </button>
+          <button *ngIf="agency.verifiedByAdmin" mdc-button outlined
+                  style="margin-right: 8px">
+            <mdc-icon>verified_user</mdc-icon>
+            View
+          </button>
+          <button mdc-button style="margin-right: 8px">
+            <mdc-icon>chat</mdc-icon>
+            Send message
+          </button>
+        </div>
+      </mdc-card>
+    </div>
+  </div>
+</main>

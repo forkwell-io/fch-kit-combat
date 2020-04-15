@@ -1,0 +1,49 @@
+<main class="scrollable">
+  <div class="content-frame">
+    <div class="content-area">
+      <div style="display: flex; flex-direction: row">
+        <div style="display: flex; flex-direction: column; flex: 1; overflow-y: auto">
+          <mdc-card *ngIf="isLoadingRequests" class="item"
+                    outlined>
+            <span mdcCaption style="margin: 24px; text-align: center">Loading agencies&#8230;</span>
+          </mdc-card>
+
+
+            <mdc-card *ngFor="let request of requests" class="item"outlined>
+                      
+              <app-card-request-contrib [requestObject]="request"></app-card-request-contrib>
+            </mdc-card>
+         
+
+        </div>
+
+
+
+        <div style="display: flex; flex-direction: column; width: 280px; margin-left: 16px">
+          <mdc-card>
+            <div style="display: flex; flex-direction: column; margin: 16px">
+              <span mdcSubtitle1>How do you help?</span>
+              <span mdcBody2 style="margin-top: 4px">You can aid those who are relentlessly fighting the COVID-19 pandemic by contributing some of your supplies.</span>
+            </div>
+            <mdc-list-divider></mdc-list-divider>
+            <div style="display: flex; flex-direction: column; margin: 16px">
+              <span mdcSubtitle1>How do you deliver your items?</span>
+              <span mdcBody2 style="margin-top: 4px">You are advised to contact the receiver or agency of your choice to negotiate transportation.</span>
+            </div>
+          </mdc-card>
+          <mdc-card style="margin-top: 8px">
+            <div style="display: flex; flex-direction: column; margin: 16px">
+              <span mdcSubtitle1>Register an account</span>
+              <span mdcBody2 style="margin-top: 4px">
+                If you are representing your agency,
+                especially those in the medical institutions such as hospitals and clinics,
+                you may express your supply needs by joining us.
+              </span>
+              <button mdc-button style="margin-top: 8px" unelevated routerLink="/auth/sign-up">Register</button>
+            </div>
+          </mdc-card>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

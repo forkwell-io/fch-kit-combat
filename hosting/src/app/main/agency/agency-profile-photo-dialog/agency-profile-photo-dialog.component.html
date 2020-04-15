@@ -1,0 +1,47 @@
+<mdc-dialog>
+  <mdc-dialog-container>
+    <mdc-dialog-surface>
+      <mdc-dialog-content>
+        <div style="display: flex; flex-direction: column">
+          <mdc-card outlined style="width: 360px; height: 360px">
+            <div *ngIf="!isUploading && droppedFile"
+                 style="display: flex; flex-direction: column; flex: 1; justify-content: center">
+              <span mdcCaption style="margin: 16px; text-align: center">{{droppedFile.name}}</span>
+              <button (click)="droppedFile = undefined" mdc-button mdcCaption
+                      outlined
+                      style="margin: 16px">Remove photo
+              </button>
+            </div>
+            <div *ngIf="isUploading"
+                 style="display: flex; flex-direction: column; flex: 1; justify-content: center">
+              <span mdcCaption style="margin: 16px; text-align: center">Uploading profile photo&#8230;</span>
+              <div style="margin: 16px">
+                <mdc-linear-progress></mdc-linear-progress>
+              </div>
+            </div>
+            <div (fileDropped)="onFileDropped($event)" *ngIf="!isUploading && !droppedFile"
+                 appDragDrop
+                 style="display: flex; flex-direction: column; flex: 1; justify-content: center">
+              <span mdcCaption style="margin: 16px; text-align: center">Drag a profile photo here</span>
+              <div style="display: flex; flex-direction: row; align-items: center; justify-content: center">
+                <div style="height: 1px; flex: 1; background: rgba(0, 0, 0, .12); margin: 0 16px"></div>
+                <span mdcOverline>Or</span>
+                <div style="height: 1px; flex: 1; background: rgba(0, 0, 0, .12); margin: 0 16px"></div>
+              </div>
+              <input #hiddenFileInput (change)="onFilePicked($event)" accept="image/jpeg,image/x-png"
+                     style="display: none" type="file">
+              <button (click)="hiddenFileInput.click()" mdc-button mdcCaption style="margin: 16px"
+                      unelevated>Select a photo
+              </button>
+            </div>
+          </mdc-card>
+        </div>
+      </mdc-dialog-content>
+      <mdc-dialog-actions>
+        <button (click)="upload()" [disabled]="isUploading || !droppedFile" mdcDialogButton
+                outlined style="width: 100%">Set as profile photo
+        </button>
+      </mdc-dialog-actions>
+    </mdc-dialog-surface>
+  </mdc-dialog-container>
+</mdc-dialog>

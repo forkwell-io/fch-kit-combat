@@ -1,0 +1,110 @@
+<main class="scrollable">
+  <div>
+    <div [mdcElevation]="2" style="background-color: #008e76; color: white; display: flex">
+      <div class="content-frame-spacious" style="margin-top: 72px">
+        <div class="content-area">
+          <div style="display: flex; flex-direction: row">
+            <div style="display: flex; flex-direction: column; flex: 1; padding: 32px; align-items: start">
+              <div
+                style="display: flex; flex-direction: row; border-radius: 8px; background-color: rgba(255, 255, 255, 0.24); padding: 16px">
+                <div style="display: flex; flex-direction: column">
+                  <span mdcHeadline5>{{joinedAgencies}}</span>
+                  <span mdcCaption style="font-weight: bold">Agencies joined</span>
+                </div>
+                <div style="display: flex; flex-direction: column; margin-left: 24px">
+                  <span mdcHeadline5>{{activeRequests}}</span>
+                  <span mdcCaption style="font-weight: bold">Active requests</span>
+                </div>
+                <div style="display: flex; flex-direction: column; margin-left: 24px">
+                  <span mdcHeadline5>{{completedRequests}}</span>
+                  <span mdcCaption style="font-weight: bold">Completed requests</span>
+                </div>
+              </div>
+              <span mdcHeadline4 style="margin-top: 24px">Contribute to help one another</span>
+              <span mdcCaption>Combating COVID-19</span>
+              <span mdcBody1 style="margin-top: 16px">
+                With the rising shortage of medical supplies amidst this COVID-19 pandemic,
+                we understand the challenge in providing our medical staff and patients the critical items they lack.
+                Therefore, we want to enable medical agencies to publish their needs easily so we can work together to meet
+                their requests as soon as possible.
+              </span>
+              <div style="display: flex; flex-direction: row; margin-top: 24px">
+                <button class="intro" mdc-button outlined routerLink="/learn-more">GET STARTED</button>
+              </div>
+            </div>
+            <div style="display: flex; flex-direction: column; flex: 1">
+              <img alt="" src="./assets/svg/sic_logo.svg" style="height: 280px">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="content-frame-medium" style="margin-top: 24px">
+      <div class="content-area">
+        <mdc-card>
+          <div style="display: flex; flex-direction: column; margin: 24px">
+            <span mdcHeadline4 style="font-weight: bold; text-align: center">Overview</span>
+          </div>
+          <div class="mdc-layout-grid" style="width: 100%">
+            <div class="mdc-layout-grid__inner">
+              <div *ngFor="let item of requestItems" class="mdc-layout-grid__cell--span-6">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                  <mdc-list-item-text
+                    secondaryText="{{item.qtyFilled}} / {{item.qtyNeed}}">{{item.name}}</mdc-list-item-text>
+                  <mdc-card-action-icons>
+                    <div #cardAnchor mdcMenuSurfaceAnchor>
+                      <button (click)="displayAgency(item.name, cardMenu)" icon="info" mdcCardAction="icon"
+                              mdcIconButton></button>
+                      <mdc-menu #cardMenu [anchorElement]="cardAnchor">
+                        <mdc-list [interactive]="false">
+                          <mdc-list-item *ngFor="let agency of agencies">
+                            {{agency.name}}
+                          </mdc-list-item>
+                          <mdc-list-item *ngIf="!loadingAgencies && agencies.length === 0;">
+                            <p mdcCaption>No Result</p>
+                          </mdc-list-item>
+                          <mdc-list-item *ngIf="loadingAgencies">
+                            <mdc-linear-progress></mdc-linear-progress>
+                          </mdc-list-item>
+                        </mdc-list>
+                      </mdc-menu>
+                    </div>
+                  </mdc-card-action-icons>
+                </div>
+                <mdc-linear-progress [buffer]=1 [progress]="item.qtyFilled/item.qtyNeed"
+                                     determinate></mdc-linear-progress>
+              </div>
+            </div>
+          </div>
+        </mdc-card>
+        <div style="display: flex; flex-direction: column; margin: 48px 24px 24px">
+          <span mdcHeadline4 style="font-weight: bold; text-align: center">Recent requests</span>
+        </div>
+        <div class="mdc-layout-grid" style="width: 100%; padding: 0">
+          <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell--span-12">
+              <div class="mdc-layout-grid__inner">
+                <div *ngFor="let topRequest of topRequests" class="mdc-layout-grid__cell--span-6">
+                  <app-card-request-contrib [currentUserId]="currentUserId"
+                                            (updated)="reloadData()"
+                                            [requestObject]="topRequest">
+                  </app-card-request-contrib>
+                </div>
+                <div *ngIf="!isLoading" class="mdc-layout-grid__cell--span-6">
+                  <mdc-card class="see-more--card" outlined>
+                    <mdc-card-primary-action class="see-more--card-action" routerLink="/comm-requests">
+                      <p mdcHeadline6 style="display: flex; align-items: center;">
+                        <mdc-icon>add</mdc-icon>&nbsp;See all requests
+                      </p>
+                    </mdc-card-primary-action>
+                  </mdc-card>
+                </div>
+              </div>
+            </div>
+            <div class="mdc-layout-grid__cell--span-12" style="padding-top: 1vh;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

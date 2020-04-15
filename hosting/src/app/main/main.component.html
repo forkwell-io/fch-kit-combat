@@ -1,0 +1,57 @@
+<div style="display: flex; width: 100vw; height: 100vh; overflow: hidden">
+  <mdc-top-app-bar [mdcElevation]="0" fixed>
+    <mdc-top-app-bar-row>
+      <mdc-top-app-bar-section align="start" style="flex: unset" title="Sharing is Caring">
+        <mdc-icon mdcTopAppBarNavIcon routerLink="/" style="padding: 0">
+          <img src="./assets/svg/sic_logo.svg" alt="" style="width: 48px; height: 48px">
+        </mdc-icon>
+      </mdc-top-app-bar-section>
+      <mdc-top-app-bar-section>
+        <button
+          *ngIf="user && isAdminVerified" mdc-button
+          routerLinkActive="active-button"
+          routerLink="/agency">
+          <mdc-icon>store</mdc-icon>
+          <span style="display: flex; align-items: center;">
+            My agency <span class="custom-chip-noti">{{inboxCount + contributionCount}}</span>
+          </span>
+        </button>
+        <button *ngIf="user && isAdmin" mdc-button
+                routerLinkActive="active-button"
+                routerLink="/admin/agencies">
+          <mdc-icon>supervisor_account</mdc-icon>
+          Admin console
+        </button>
+      </mdc-top-app-bar-section>
+      <mdc-top-app-bar-section align="end">
+        <button *ngIf="isLoading" disabled mdc-button outlined>
+          <mdc-linear-progress></mdc-linear-progress>
+        </button>
+        <button *ngIf="!isLoading && !user" mdc-button routerLink="/auth" unelevated>
+          <mdc-icon>person</mdc-icon>
+          Sign in
+        </button>
+        <button (click)="options.open = !options.open" *ngIf="!isLoading && user" mdc-button outlined>
+          <mdc-icon>person</mdc-icon>
+          <span *ngIf="agency">{{agency.name}}</span>
+        </button>
+        <div #optionsAnchor mdcMenuSurfaceAnchor>
+          <mdc-menu #options [anchorElement]="optionsAnchor"
+                    style="width: 280px">
+            <mdc-list>
+              <mdc-list-item routerLink="/agency/details">Profile details</mdc-list-item>
+              <mdc-list-item (click)="signOut()">Sign out</mdc-list-item>
+            </mdc-list>
+          </mdc-menu>
+        </div>
+      </mdc-top-app-bar-section>
+    </mdc-top-app-bar-row>
+    <div style="height: 0">
+      <div style="height: 1px; background-color: rgba(0, 0, 0, 0.12)"></div>
+    </div>
+  </mdc-top-app-bar>
+
+  <div mdcTopAppBarFixedAdjust style="flex: 1; overflow: hidden">
+    <router-outlet></router-outlet>
+  </div>
+</div>

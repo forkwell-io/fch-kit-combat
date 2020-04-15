@@ -1,0 +1,9 @@
+@use '@material/button';
+
+.mdc-button.intro {
+  @include button.ink-color(white);
+  @include button.outline-color(white);
+  @include button.outline-width(2px, 24px);
+  @include button.height(56px);
+  @include button.shape-radius(28px);
+}

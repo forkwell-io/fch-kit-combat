@@ -1,0 +1,41 @@
+<main>
+  <div class="user-item">
+    <mdc-card style="margin: 16px">
+      <span *ngIf="isLoading" mdcCaption style="margin: 24px">Loading</span>
+      <mdc-data-table *ngIf="!isLoading">
+        <table mdcDataTableTable>
+          <thead>
+          <tr mdcDataTableHeaderRow>
+            <th mdcDataTableHeaderCell>Email</th>
+            <th mdcDataTableHeaderCell>Identifier</th>
+            <th mdcDataTableHeaderCell>Roles</th>
+            <th mdcDataTableHeaderCell>Verified</th>
+            <th mdcDataTableHeaderCell></th>
+          </tr>
+          </thead>
+          <tbody mdcDataTableContent>
+          <tr *ngFor="let user of users" mdcDataTableRow>
+            <th mdcDataTableCell style="text-align: start">
+              <span mdcCaption>{{user.email}}</span>
+            </th>
+            <th mdcDataTableCell style="text-align: start">
+              <span mdcCaption>{{user.userId}}</span>
+            </th>
+            <th mdcDataTableCell style="text-align: start">
+              <span mdcCaption>{{parseRoles(user)}}</span>
+            </th>
+            <th mdcDataTableCell style="text-align: start">
+              <span mdcCaption>{{user.verifiedByAdmin ? 'Yes' : 'No'}}</span>
+            </th>
+            <th mdcDataTableCell numeric>
+              <button (click)="deleteUser(user)" mdc-icon-button>
+                <mdc-icon>delete_forever</mdc-icon>
+              </button>
+            </th>
+          </tr>
+          </tbody>
+        </table>
+      </mdc-data-table>
+    </mdc-card>
+  </div>
+</main>

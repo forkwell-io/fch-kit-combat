@@ -1,0 +1,54 @@
+<mdc-dialog>
+  <mdc-dialog-container>
+    <mdc-dialog-surface style="min-width: 540px; max-width: 640px;">
+      <mdc-dialog-title>Leave Message</mdc-dialog-title>
+      <ng-container *ngIf="!loading; else emptyState">
+        <mdc-dialog-content style="text-align: center;">
+          <p style="margin-bottom: 0;" mdcHeadline6><b>{{request.userInfo.name}}</b></p>
+          <p style="margin: 0;" mdcCaption>{{request.userInfo.address}}</p>
+          <p style="margin: 0;" mdcCaption>{{request.userInfo.phone}} / {{request.userInfo.email}}</p>
+        </mdc-dialog-content>
+        <mdc-dialog-content *ngIf="!messageSent">
+          <form [formGroup]="messageForm" id="messageForm" (ngSubmit)="submit()" autocomplete="off">
+            <mdc-form-field fluid>
+              <mdc-text-field formControlName="name" label="Name / Agency" outlined></mdc-text-field>
+              <mdc-helper-text validation>*Required</mdc-helper-text>
+            </mdc-form-field>
+            <mdc-form-field fluid>
+              <mdc-text-field formControlName="contact" label="Contact" outlined></mdc-text-field>
+              <mdc-helper-text validation>*Required</mdc-helper-text>
+            </mdc-form-field>
+            <mdc-form-field fluid>
+              <mdc-text-field type="email" formControlName="email" label="Email" maxlength="254"
+                              outlined></mdc-text-field>
+              <mdc-helper-text validation>*Required</mdc-helper-text>
+            </mdc-form-field>
+            <mdc-form-field fluid>
+              <mdc-text-field formControlName="subject" label="Subject" outlined></mdc-text-field>
+              <mdc-helper-text validation>*Required</mdc-helper-text>
+            </mdc-form-field>
+            <mdc-form-field fluid>
+              <mdc-textarea formControlName="message" label="Remark / Message" outlined></mdc-textarea>
+              <mdc-helper-text validation>*Required</mdc-helper-text>
+            </mdc-form-field>
+          </form>
+        </mdc-dialog-content>
+        <mdc-dialog-content *ngIf="messageSent">
+          <p style="text-align: center;" mdcHeadline6>Message sent</p>
+        </mdc-dialog-content>
+        <mdc-dialog-actions *ngIf="!messageSent">
+          <button mdcDialogButton mdcDialogAction="close">Cancel</button>
+          <button raised mdcDialogButton form="messageForm">Send</button>
+        </mdc-dialog-actions>
+        <mdc-dialog-actions *ngIf="messageSent">
+          <button mdcDialogButton mdcDialogAction="close">OK</button>
+        </mdc-dialog-actions>
+      </ng-container>
+      <ng-template #emptyState>
+        <mdc-dialog-content>
+          <mdc-linear-progress></mdc-linear-progress>
+        </mdc-dialog-content>
+      </ng-template>
+    </mdc-dialog-surface>
+  </mdc-dialog-container>
+</mdc-dialog>

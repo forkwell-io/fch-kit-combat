@@ -1,0 +1,37 @@
+<form (ngSubmit)="signIn()" [formGroup]="formGroup" style="display: flex; flex-direction: column;">
+  <div style="display: flex; margin: 0 auto 24px;">
+    <mdc-icon style="width: 48px; height: 48px; margin: auto;">share</mdc-icon>
+    <div style="display: flex; flex-direction: column; margin: auto 0 auto 16px">
+      <span mdcHeadline5>Sign in</span>
+      <span mdcBody1>with your email</span>
+    </div>
+  </div>
+  <mdc-form-field>
+    <mdc-text-field autocomplete="email" formControlName="email" label="Email" name="email" outlined
+                    spellcheck="false" type="email"></mdc-text-field>
+    <mdc-helper-text persistent validation>
+      <span *ngIf="formGroup.controls.email.hasError('required')">Enter your email address</span>
+      <span *ngIf="formGroup.controls.email.hasError('email')">Enter a valid email address</span>
+    </mdc-helper-text>
+  </mdc-form-field>
+  <mdc-form-field>
+    <mdc-text-field [type]="showPassword ? 'text' : 'password'" autocomplete="current-password"
+                    formControlName="password"
+                    label="Password"
+                    name="password"
+                    outlined>
+      <button (click)="togglePasswordVisibility()" mdc-icon-button mdcTextFieldIcon trailing type="button">
+        <mdc-icon>{{showPassword ? 'visibility' : 'visibility_off'}}</mdc-icon>
+      </button>
+    </mdc-text-field>
+    <mdc-helper-text persistent validation>
+      <span *ngIf="formGroup.controls.password.hasError('required')">Enter your password</span>
+      <span *ngIf="formGroup.controls.password.hasError('minlength')">Password too weak</span>
+    </mdc-helper-text>
+  </mdc-form-field>
+  <div style="display: flex; margin-top: 16px; justify-content: space-between; flex-flow: wrap;">
+    <button mdc-button outlined routerLink="/auth/sign-up" style="margin-top: 8px;" type="button">Create an account
+    </button>
+    <button [disabled]="!formGroup.valid" mdc-button raised style="margin-top: 8px;" type="submit">Sign in</button>
+  </div>
+</form>
