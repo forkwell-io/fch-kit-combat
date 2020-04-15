@@ -79,3 +79,6 @@ To run the functions, a Firebase project is required as described in [here](http
 ### Building Angular project (inside `./hosting`)
 Change the content of class variable `firebaseConfig` to your own Firebase project web config (explained [here](https://support.google.com/firebase/answer/7015592?hl=en)). Assuming Node.js and [Angular CLI](https://angular.io/guide/setup-local) has been installed on a development PC, run `ng build --prod` to build the project as deployable web.
 
+## Supported by
+NEUON SDN. BHD.
+www.neuon.ai
