@@ -5,6 +5,8 @@
 
 [Presentation Video](https://youtu.be/c3NvDRjQ38k "Presentation Video")
 
+[1 min Short Video](https://www.youtube.com/watch?v=KWTisv9JJBs)
+
 ## Team
 ### Team Name
 The Game Changer
