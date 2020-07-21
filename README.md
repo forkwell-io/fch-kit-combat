@@ -31,7 +31,7 @@ Our ultimate mission is to break the chain of infection and restore some kind of
 ## Documentation
 Documentation of the project can be found [here](readme-resources/chainbreaker-documentation.pdf "Project Documentation").
 
-## Screenshots
+## Screenshots of Prototype
  ### Login Screen
  ![Login Screen](readme-resources/App-Login.png?raw=true)
  
